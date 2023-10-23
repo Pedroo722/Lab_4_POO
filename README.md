@@ -8,5 +8,5 @@ Crie um sistema de ponto de venda para gerenciar produtos, vendas e inventário.
 - (7 pontos) Implemente um sistema de alerta para itens com poucas unidades em estoque
 - (8 pontos) Implemente um sistema de relatório que mostre itens que geralmente são comprados juntos (para cada produto, basta mostrar outros dois)
 
-Alunos: Pedro Herique Alexandre Rocha
+Alunos: Pedro Herique Alexandre Rocha &
         Vinicius Cavalcante Pequeno
