@@ -53,7 +53,7 @@ public class Main {
               try {
                 controller.cadastrarProduto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
               } catch (IDInvalidoException ex) {
-                System.out.println("\n[ALERTA] Operação Falha. Esse ID já está cadastrado!");
+                System.out.println("\n[ALERTA] Operação Falha. Esse ID já está cadastrado!\n");
                 break;
               }
 
@@ -74,7 +74,7 @@ public class Main {
               try {
                 controller.listarProdutos();
               } catch (EstoqueVazioException ex) {
-                System.out.println("\n[ALERTA] Operação Falha. O estoque está vazio!!");
+                System.out.println("\n[ALERTA] Operação Falha. O estoque está vazio!\n");
                 break;
               }
 
