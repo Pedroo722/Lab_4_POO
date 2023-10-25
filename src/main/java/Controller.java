@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 // Exceções
 
-
 import exceptions.ProdutoNaoEncontradoException;
 import exceptions.NumeroVendaInvalidoException;
 import exceptions.EstoqueVazioException;
+import exceptions.IDInvalidoException;
 import exceptions.VendasVazioException;
 
 // Classes
@@ -31,7 +31,13 @@ public class Controller {
   }
 
 // Caso 1. Cadastrar produto no Estoque
-  public void cadastrarProduto(int identificadorProduto, String nomeProduto, double precoProduto, int quantidadeProduto) {
+  public void cadastrarProduto(Integer identificadorProduto, String nomeProduto, double precoProduto, int quantidadeProduto) {
+    for (Produto produto : inventario.listarProdutos()) {
+      if (identificadorProduto.equals(produto.getIdentificador())) {
+        throw new IDInvalidoException();
+      }
+    }
+
     Produto novoProduto = new Produto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
     inventario.adicionarProduto(novoProduto);
   }
@@ -43,12 +49,12 @@ public class Controller {
     }
     
     Scanner nomeScanner = new Scanner(System.in); // Scanner próprio para pegar os espaços em branco
-    String produtoEditando = nomeScanner.nextLine();
+    Integer produtoEditando = scanner.nextInt();
 
     boolean produtoEncontrado = false;
 
     for (Produto produto : inventario.listarProdutos()) {
-      if (produto.getNome().equalsIgnoreCase(produtoEditando)) {
+      if (produtoEditando.equals(produto.getIdentificador())) {
         System.out.println("\nInforme o novo nome do produto:");
         String novoNomeProduto = nomeScanner.nextLine();
         System.out.println("Informe o novo preço do produto:");

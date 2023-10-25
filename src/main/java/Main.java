@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+import exceptions.EstoqueVazioException;
+import exceptions.IDInvalidoException;
+
 public class Main {
   public static void main(String[] args) {
     Controller controller = new Controller();
@@ -45,16 +48,21 @@ public class Main {
               System.out.println("Informe o preço do produto:");
               double precoProduto = scanner.nextDouble();
               System.out.println("Informe a quantidade do produto a ser adicionada no estoque:");
-              int quantidadeProduto = scanner.nextInt();
+              Integer quantidadeProduto = scanner.nextInt();
 
-              controller.cadastrarProduto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
+              try {
+                controller.cadastrarProduto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
+              } catch (IDInvalidoException ex) {
+                System.out.println("\n[ALERTA] Operação Falha. Esse ID já está cadastrado!");
+                break;
+              }
 
               System.out.println("\nProduto adicionado ao estoque.\n");
               break;
 
            // Editar no Estoque
             case 2:
-              System.out.println("\nInforme o nome do produto a ser editado:");
+              System.out.println("\nInforme o ID do produto a ser editado:");
               controller.editarProduto(scanner);
               System.out.println("\nProduto editado com sucesso\n");
               break;
@@ -62,7 +70,14 @@ public class Main {
            // Listar os produtos no estoque
             case 3:
               System.out.println();
-              controller.listarProdutos();
+              
+              try {
+                controller.listarProdutos();
+              } catch (EstoqueVazioException ex) {
+                System.out.println("\n[ALERTA] Operação Falha. O estoque está vazio!!");
+                break;
+              }
+
               break;
 
            // Remover do Estoque
