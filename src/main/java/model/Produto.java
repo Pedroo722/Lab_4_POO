@@ -1,6 +1,7 @@
 package model;
 
 public class Produto {
+  private int identificador;
   private String nome;
   private double preco;
   private int quantidade;
@@ -13,10 +14,11 @@ public class Produto {
       this.quantidade = quantidade;
   }
 
-  // Construtor para Vendas
-  public Produto(String nome, double preco) {
+  public Produto(int identificador, String nome, double preco, int quantidade) {
+      this.identificador = identificador;
       this.nome = nome;
       this.preco = preco;
+      this.quantidade = quantidade;
   }
   
   public String getNome() {
@@ -41,5 +43,13 @@ public class Produto {
   
   public void setQuantidade(int quantidade) {
   	this.quantidade = quantidade;
+  }
+
+  public int getIdentificador() {
+  	return quantidade;
+  }
+  
+  public void setIdentificador(int identificador) {
+  	this.identificador = identificador;
   }
 }

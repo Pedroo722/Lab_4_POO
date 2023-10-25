@@ -1,9 +1,5 @@
-import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 // Exceções
@@ -35,8 +31,8 @@ public class Controller {
   }
 
 // Caso 1. Cadastrar produto no Estoque
-  public void cadastrarProduto(String nomeProduto, double precoProduto, int quantidadeProduto) {
-    Produto novoProduto = new Produto(nomeProduto, precoProduto, quantidadeProduto);
+  public void cadastrarProduto(int identificadorProduto, String nomeProduto, double precoProduto, int quantidadeProduto) {
+    Produto novoProduto = new Produto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
     inventario.adicionarProduto(novoProduto);
   }
 
@@ -87,6 +83,7 @@ public class Controller {
     for (int i = 0; i < produtosNoEstoque.size(); i++) {
       Produto produto = produtosNoEstoque.get(i);
       System.out.println("Produto #" + (i + 1));
+      System.out.println("ID: " + produto.getIdentificador());
       System.out.println("Nome: " + produto.getNome());
       System.out.println("Preço: " + produto.getPreco());
       System.out.println("Quantidade Atual: " + produto.getQuantidade());
@@ -163,54 +160,9 @@ public class Controller {
           System.out.println("* Quantidade Vendida: " + produto.getQuantidade());
           System.out.println();
         }
-        // mostrarProdutosCompradosJuntos(produtosVenda);
       }
     }
   }
-
-    // Função para mostrar os produtos geralmente comprados juntos (TODO BUGADO)
-  // private void mostrarProdutosCompradosJuntos(List<Produto> produtosVenda) {
-  //   Map<String, Map<String, Integer>> produtosCompradosJuntos = new HashMap<>();
-
-  //   for (int i = 0; i < produtosVenda.size(); i++) {
-  //     Produto produtoA = produtosVenda.get(i);
-
-  //     if (!produtosCompradosJuntos.containsKey(produtoA.getNome())) {
-  //       produtosCompradosJuntos.put(produtoA.getNome(), new HashMap<>());
-  //     }
-
-  //     for (int j = 0; j < produtosVenda.size(); j++) {
-  //       if (i != j) {
-  //         Produto produtoB = produtosVenda.get(j);
-  //         Map<String, Integer> produtosCompradosJuntosMap = produtosCompradosJuntos.get(produtoA.getNome());
-  //         produtosCompradosJuntosMap.put(produtoB.getNome(),
-  //           produtosCompradosJuntosMap.getOrDefault(produtoB.getNome(), 0) + 1);
-  //       }
-  //     }
-  //   }
-
-  //   for (String produto : produtosCompradosJuntos.keySet()) {
-  //     System.out.println("Produtos geralmente comprados com " + produto + ":");
-  //     Map<String, Integer> produtosCompradosJuntosMap = produtosCompradosJuntos.get(produto);
-
-  //     // Ordene a lista de produtos comprados juntos
-  //     List<Map.Entry<String, Integer>> produtosOrdenados = new ArrayList<>(produtosCompradosJuntosMap.entrySet());
-  //     Collections.sort(produtosOrdenados, new Comparator<Map.Entry<String, Integer>>() {
-  //       public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
-  //         return entry2.getValue().compareTo(entry1.getValue());
-  //       }
-  //     });
-
-  //     // Mostre os dois produtos mais vendidos juntos
-  //     for (int k = 0; k < 2 && k < produtosOrdenados.size(); k++) {
-  //         Map.Entry<String, Integer> entry = produtosOrdenados.get(k);
-  //         String produtoCompradoJunto = entry.getKey();
-  //         int quantidadeCompradaJunto = entry.getValue();
-  //         System.out.println("  - Produto: " + produtoCompradoJunto + ", Quantidade: " + quantidadeCompradaJunto);
-  //     }
-  //     System.out.println();
-  //   }
-  // }
 
  // Caso 7. Apagar uma venda
   public void apagarVenda(int numeroVenda) {

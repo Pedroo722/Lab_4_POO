@@ -38,6 +38,8 @@ public class Main {
            // Adicionar ao Estoque 
             case 1:
               System.out.println();
+              System.out.println("Informe o ID do produto:");
+              int identificadorProduto = scanner.nextInt();
               System.out.println("Informe o nome do produto:");
               String nomeProduto = nomeScanner.nextLine();
               System.out.println("Informe o preço do produto:");
@@ -45,7 +47,8 @@ public class Main {
               System.out.println("Informe a quantidade do produto a ser adicionada no estoque:");
               int quantidadeProduto = scanner.nextInt();
 
-              controller.cadastrarProduto(nomeProduto, precoProduto, quantidadeProduto);
+              controller.cadastrarProduto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
+
               System.out.println("\nProduto adicionado ao estoque.\n");
               break;
 
