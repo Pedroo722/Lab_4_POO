@@ -47,7 +47,7 @@ public class Controller {
     if (inventario.listarProdutos().isEmpty()) {
       throw new EstoqueVazioException();
     }
-    
+
     Scanner nomeScanner = new Scanner(System.in); // Scanner próprio para pegar os espaços em branco
     Integer produtoEditando = scanner.nextInt();
 
@@ -108,7 +108,7 @@ public class Controller {
       }
     }
     System.out.println();
-    
+
   }
 
 // Caso 4. Remover um produto especifico do Estoque
@@ -130,24 +130,35 @@ public class Controller {
   }
 
  // Caso 5. Cadastrar uma venda
-  public void adicionarItemVenda(int quantidadeDaVenda, Scanner scanner, Scanner nomeScanner) {
+  public void adicionarItemVenda(int quantidadeDaVenda, Scanner scanner) {
     ItemVenda novaVenda = new ItemVenda(); // Cria uma nova instância de ItemVenda, para cada venda cadastrada
 
     for (int i = 0; i < quantidadeDaVenda; i++) {
-      System.out.println("\nInforme o nome do produto:");
-      String nomeItem = nomeScanner.nextLine();
-      System.out.println("Informe o preço do produto:");
-      double precoItem = scanner.nextDouble();
-      System.out.println("Informe a quantidade do produto a ser vendido:");
-      int quantidadeItem = scanner.nextInt();
+      System.out.println("\nInforme o identificador do produto #" + (i + 1) + ":");
+      int identificadorProduto = scanner.nextInt();
 
-      Produto itemDaVenda = new Produto(nomeItem, precoItem, quantidadeItem);
-      novaVenda.adicionarProduto(itemDaVenda);
+      Produto produto = buscarProdutoPorIdentificador(identificadorProduto);
+
+      if (produto != null) {
+        novaVenda.adicionarProduto(produto);
+        System.out.println("Produto adicionado à venda.");
+      } else {
+        System.out.println("Produto não encontrado no inventário. Não foi adicionado à venda.");
+      }
     }
 
     vendas.novaVenda(novaVenda);
   }
 
+  public Produto buscarProdutoPorIdentificador(int identificadorProduto) {
+    for (Produto produto : inventario.listarProdutos()) {
+      if (identificadorProduto == produto.getIdentificador()) {
+        return produto;
+      }
+    }
+    return null; // Produto não encontrado
+  }
+    
  // Caso 6. Listar as vendas atuais
   public void relatorioVendas() {
     List<ItemVenda> vendas = this.vendas.listarVendas();
@@ -180,4 +191,3 @@ public class Controller {
     System.out.println("Venda #" + numeroVenda + " removida com sucesso.\n");
   }
 }
-

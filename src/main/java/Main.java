@@ -70,7 +70,7 @@ public class Main {
            // Listar os produtos no estoque
             case 3:
               System.out.println();
-              
+
               try {
                 controller.listarProdutos();
               } catch (EstoqueVazioException ex) {
@@ -114,7 +114,7 @@ public class Main {
             case 1:
               System.out.println("\nQuantos produtos a venda terá?");
               int quantidadeDaVenda = scanner.nextInt();
-              controller.adicionarItemVenda(quantidadeDaVenda, scanner, nomeScanner);
+              controller.adicionarItemVenda(quantidadeDaVenda, scanner);
               System.out.println("\nVenda cadastrada!\n");
               break;
 
