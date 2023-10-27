@@ -82,9 +82,9 @@ public class Main {
 
            // Remover do Estoque
             case 4:
-              System.out.println("\nInforme o nome do produto a ser removido:");
-              String nomeProdutoRemover = nomeScanner.nextLine();
-              controller.removerProduto(nomeProdutoRemover);
+              System.out.println("\nInforme o ID do produto a ser removido:");
+              Integer idProdutoRemover = nomeScanner.nextInt();
+              controller.removerProduto(idProdutoRemover);
               System.out.println("Produto removido com sucesso.\n");
               break;
 

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemVenda {
-    private List<Produto> produtos;
+  private List<ProdutoVenda> produtos;
 
-    public ItemVenda() {
-      produtos = new ArrayList<>();
-    }
+  public ItemVenda() {
+    produtos = new ArrayList<>();
+  }
 
-    public void adicionarProduto(Produto produto) {
-      produtos.add(produto);
-    }
+  public void adicionarProduto(Produto produto, int quantidadeVendida) {
+    produtos.add(new ProdutoVenda(produto, quantidadeVendida));
+  }
 
-    public List<Produto> getProdutos() {
-      return produtos;
-    }
+  public List<ProdutoVenda> getProdutos() {
+    return produtos;
+  }
 }

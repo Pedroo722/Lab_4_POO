@@ -19,6 +19,28 @@ import model.Inventario;
 
 // Classe Principal
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// Exceções
+
+import exceptions.ProdutoNaoEncontradoException;
+import exceptions.NumeroVendaInvalidoException;
+import exceptions.EstoqueVazioException;
+import exceptions.IDInvalidoException;
+import exceptions.VendasVazioException;
+
+// Classes
+
+import model.Vendas;
+import model.Produto;
+import model.ProdutoVenda;
+import model.ItemVenda;
+import model.Inventario;
+
+// Classe Principal
+
 public class Controller {
   private Inventario inventario;
   private ItemVenda itemVenda;
@@ -48,15 +70,15 @@ public class Controller {
       throw new EstoqueVazioException();
     }
 
-    Scanner nomeScanner = new Scanner(System.in); // Scanner próprio para pegar os espaços em branco
     Integer produtoEditando = scanner.nextInt();
+    scanner.nextLine(); // Limpeza do buffer de entrada
 
     boolean produtoEncontrado = false;
 
     for (Produto produto : inventario.listarProdutos()) {
       if (produtoEditando.equals(produto.getIdentificador())) {
         System.out.println("\nInforme o novo nome do produto:");
-        String novoNomeProduto = nomeScanner.nextLine();
+        String novoNomeProduto = scanner.nextLine(); // Use o scanner aqui para capturar o nome
         System.out.println("Informe o novo preço do produto:");
         double novoPrecoProduto = scanner.nextDouble();
         System.out.println("Informe a nova quantidade do produto:");
@@ -72,7 +94,7 @@ public class Controller {
     }
 
     if (!produtoEncontrado) {
-        throw new ProdutoNaoEncontradoException();
+      throw new ProdutoNaoEncontradoException();
     }
   }
 
@@ -112,26 +134,26 @@ public class Controller {
   }
 
 // Caso 4. Remover um produto especifico do Estoque
-  public void removerProduto(String nomeProdutoRemover) {
-      List<Produto> produtos = inventario.listarProdutos();
-      boolean produtoEncontrado = false;
+  public void removerProduto(Integer idProdutoRemover) {
+    List<Produto> produtos = inventario.listarProdutos();
+    boolean produtoEncontrado = false;
 
-      for (Produto produto : produtos) {
-          if (produto.getNome().equalsIgnoreCase(nomeProdutoRemover)) {
-              inventario.removerProduto(produto);
-              produtoEncontrado = true;
-              break;
-          }
+    for (Produto produto : produtos) {
+      if (idProdutoRemover.equals(produto.getIdentificador())) {
+        inventario.removerProduto(produto);
+        produtoEncontrado = true;
+        break;
       }
+    }
 
-      if (!produtoEncontrado) {
-          throw new ProdutoNaoEncontradoException();
-      }
+    if (!produtoEncontrado) {
+      throw new ProdutoNaoEncontradoException();
+    }
   }
 
  // Caso 5. Cadastrar uma venda
   public void adicionarItemVenda(int quantidadeDaVenda, Scanner scanner) {
-    ItemVenda novaVenda = new ItemVenda(); // Cria uma nova instância de ItemVenda, para cada venda cadastrada
+    ItemVenda novaVenda = new ItemVenda();
 
     for (int i = 0; i < quantidadeDaVenda; i++) {
       System.out.println("\nInforme o identificador do produto #" + (i + 1) + ":");
@@ -140,23 +162,31 @@ public class Controller {
       Produto produto = buscarProdutoPorIdentificador(identificadorProduto);
 
       if (produto != null) {
-        novaVenda.adicionarProduto(produto);
-        System.out.println("Produto adicionado à venda.");
-      } else {
+        System.out.println("Informe a quantidade a ser vendida do produto #" + (i + 1) + ":");
+        int quantidadeVendida = scanner.nextInt();
+
+        if (quantidadeVendida <= produto.getQuantidade()) {
+            novaVenda.adicionarProduto(produto, quantidadeVendida);
+            produto.setQuantidade(produto.getQuantidade() - quantidadeVendida);
+            System.out.println("Produto adicionado à venda.");
+        } else {
+            System.out.println("Quantidade insuficiente em estoque. Não foi adicionado à venda.");
+        }
+    } else {
         System.out.println("Produto não encontrado no inventário. Não foi adicionado à venda.");
       }
     }
 
     vendas.novaVenda(novaVenda);
   }
-
+  
   public Produto buscarProdutoPorIdentificador(int identificadorProduto) {
     for (Produto produto : inventario.listarProdutos()) {
       if (identificadorProduto == produto.getIdentificador()) {
         return produto;
       }
     }
-    return null; // Produto não encontrado
+    return null;
   }
     
  // Caso 6. Listar as vendas atuais
@@ -170,11 +200,12 @@ public class Controller {
         ItemVenda venda = vendas.get(i);
         System.out.println("Venda #" + (i + 1));
 
-        List<Produto> produtosVenda = venda.getProdutos();
-        for (Produto produto : produtosVenda) {
+        List<ProdutoVenda> produtosVenda = venda.getProdutos();
+        for (ProdutoVenda produtoVenda : produtosVenda) {
+          Produto produto = produtoVenda.getProduto();
           System.out.println("* Nome do Produto: " + produto.getNome());
           System.out.println("* Preço: " + produto.getPreco());
-          System.out.println("* Quantidade Vendida: " + produto.getQuantidade());
+          System.out.println("* Quantidade Vendida: " + produtoVenda.getQuantidadeVendida());
           System.out.println();
         }
       }

@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Inventario {
-    private List<Produto> estoque;
+  private List<Produto> estoque;
 
-    public Inventario() {
-        estoque = new ArrayList<>();
-    }
+  public Inventario() {
+    estoque = new ArrayList<>();
+  }
 
-    public void adicionarProduto(Produto produto) {
-        estoque.add(produto);
-    }
+  public void adicionarProduto(Produto produto) {
+    estoque.add(produto);
+  }
 
-    public List<Produto> listarProdutos() {
-        return estoque;
-    }
+  public List<Produto> listarProdutos() {
+    return estoque;
+  }
 
-    public void removerProduto(Produto produto) {
-        estoque.remove(produto);
-    }
+  public void removerProduto(Produto produto) {
+    estoque.remove(produto);
+  }
 }
