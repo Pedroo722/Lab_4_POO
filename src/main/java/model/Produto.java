@@ -5,7 +5,6 @@ public class Produto {
   private String nome;
   private double preco;
   private int quantidade;
-  private int quantidadeVendida;
 
   public Produto(int identificador, String nome, double preco, int quantidade) {
       this.identificador = identificador;
@@ -44,13 +43,5 @@ public class Produto {
 
   public void setIdentificador(int identificador) {
     this.identificador = identificador;
-  }
-
-  public int getQuantidadeVendida() {
-    return quantidadeVendida;
-  }
-
-  public void setQuantidadeVendida(int quantidadeVendida) {
-    this.quantidadeVendida = quantidadeVendida;
   }
 }
