@@ -10,3 +10,7 @@ Crie um sistema de ponto de venda para gerenciar produtos, vendas e inventário.
 
 Alunos: Pedro Herique Alexandre Rocha &
         Vinicius Cavalcante Pequeno
+
+## **Diagrama de Classes UML**
+
+![Diagrama de Classes UML](https://github.com/Pedroo722/Lab_4_POO/assets/132232273/59a89ab6-6063-49b2-8661-29eb9badb2d5)
