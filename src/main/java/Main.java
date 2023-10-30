@@ -1,13 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import exceptions.EstoqueVazioException;
 import exceptions.IDInvalidoException;
+import exceptions.InventarioInsuficienteException;
+import exceptions.NumeroVendaInvalidoException;
+import exceptions.ProdutoNaoEncontradoException;
+import exceptions.VendasVazioException;
 
 public class Main {
   public static void main(String[] args) {
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
-    Scanner nomeScanner = new Scanner(System.in); // scanner para pegar a linha completa
+    Scanner nomeScanner = new Scanner(System.in); // scanner para pegar a linha inteira
     boolean processamento = true; // flag para o loop
 
     System.out.println("Bem-vindo ao Ponto de Venda do Jeremias!");
@@ -55,6 +61,8 @@ public class Main {
               } catch (IDInvalidoException ex) {
                 System.out.println("\n[ALERTA] Operação Falha. Esse ID já está cadastrado!\n");
                 break;
+              } catch (InventarioInsuficienteException ex) {
+                System.out.println("\n[ALERTA] Quantidade insuficiente no estoque!");
               }
 
               System.out.println("\nProduto adicionado ao estoque.\n");
@@ -73,7 +81,13 @@ public class Main {
               System.out.println("Informe a nova quantidade do produto:");
               int novaQuantidadeProduto = scanner.nextInt();
 
-              controller.editarProduto(produtoEditando, novoNomeProduto, novoPrecoProduto, novaQuantidadeProduto);
+              try {
+                controller.editarProduto(produtoEditando, novoNomeProduto, novoPrecoProduto, novaQuantidadeProduto);
+              } catch (ProdutoNaoEncontradoException ex) {
+                System.out.println("\n[ALERTA] Operação Falha. Produto não encontrado!\n");
+                break;
+              }
+
               System.out.println("\nProduto editado com sucesso\n");
               break;
 
@@ -93,8 +107,13 @@ public class Main {
            // Remover do Estoque
             case 4:
               System.out.println("\nInforme o ID do produto a ser removido:");
-              Integer idProdutoRemover = nomeScanner.nextInt();
-              controller.removerProduto(idProdutoRemover);
+              Integer idProdutoRemover = scanner.nextInt();
+              try {
+                controller.removerProduto(idProdutoRemover);
+              } catch (ProdutoNaoEncontradoException ex) {
+                System.out.println("\n[ALERTA] Produto não encontrado.\n");
+                break;
+              }
               System.out.println("Produto removido com sucesso.\n");
               break;
 
@@ -124,21 +143,43 @@ public class Main {
             case 1:
               System.out.println("\nQuantos produtos a venda terá?");
               int quantidadeDaVenda = scanner.nextInt();
-              controller.adicionarItemVenda(quantidadeDaVenda, scanner);
+
+              List<Integer> identificadoresProdutos = new ArrayList<>();
+              List<Integer> quantidadesVendidas = new ArrayList();
+
+              for (int i = 0; i < quantidadeDaVenda; i++) {
+                  System.out.println("\nInforme o identificador do produto #" + (i + 1) + ":");
+                  int identificadorProduto = scanner.nextInt();
+                  identificadoresProdutos.add(identificadorProduto);
+                  System.out.println("Informe a quantidade a ser vendida do produto #" + (i + 1) + ":");
+                  int quantidadeVendida = scanner.nextInt();
+                  quantidadesVendidas.add(quantidadeVendida);
+              }
+
+              controller.adicionarItemVenda(identificadoresProdutos, quantidadesVendidas);
               System.out.println("\nVenda cadastrada!\n");
               break;
 
            // Listar as vendas cadastradas
             case 2:
               System.out.println();
-              controller.relatorioVendas();
+              try {
+                controller.relatorioVendas();
+              } catch (VendasVazioException ex) {
+                System.out.println("\n[ALERTA] Nenhuma venda cadastrada!\n");
+                break;
+              }
               break;
 
            // Apagar uma venda
             case 3:
               System.out.print("\nInforme o número da venda a ser apagada: ");
               int numeroVendaApagar = scanner.nextInt();
-              controller.apagarVenda(numeroVendaApagar);
+              try {
+                controller.apagarVenda(numeroVendaApagar);
+              } catch (NumeroVendaInvalidoException ex) {
+                System.out.println("\n[ALERTA] Operação Falha. Número da venda não encontrado\n");
+              }
               break;
 
            // Voltar ao menu principal

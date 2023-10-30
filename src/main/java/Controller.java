@@ -1,32 +1,11 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 // Exceções
 
 import exceptions.ProdutoNaoEncontradoException;
 import exceptions.NumeroVendaInvalidoException;
-import exceptions.EstoqueVazioException;
-import exceptions.IDInvalidoException;
-import exceptions.VendasVazioException;
-
-// Classes
-
-import model.Vendas;
-import model.Produto;
-import model.ItemVenda;
-import model.Inventario;
-
-// Classe Principal
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-// Exceções
-
-import exceptions.ProdutoNaoEncontradoException;
-import exceptions.NumeroVendaInvalidoException;
+import exceptions.InventarioInsuficienteException;
 import exceptions.EstoqueVazioException;
 import exceptions.IDInvalidoException;
 import exceptions.VendasVazioException;
@@ -143,29 +122,26 @@ public class Controller {
   }
 
  // Caso 5. Cadastrar uma venda
-  public void adicionarItemVenda(int quantidadeDaVenda, Scanner scanner) {
+  public void adicionarItemVenda(List<Integer> identificadoresProdutos, List<Integer> quantidadesVendidas) {
     ItemVenda novaVenda = new ItemVenda();
 
-    for (int i = 0; i < quantidadeDaVenda; i++) {
-      System.out.println("\nInforme o identificador do produto #" + (i + 1) + ":");
-      int identificadorProduto = scanner.nextInt();
+    for (int i = 0; i < identificadoresProdutos.size(); i++) {
+        int identificadorProduto = identificadoresProdutos.get(i);
+        int quantidadeVendida = quantidadesVendidas.get(i);
 
-      Produto produto = buscarProdutoPorIdentificador(identificadorProduto);
+        Produto produto = buscarProdutoPorIdentificador(identificadorProduto);
 
-      if (produto != null) {
-        System.out.println("Informe a quantidade a ser vendida do produto #" + (i + 1) + ":");
-        int quantidadeVendida = scanner.nextInt();
-
-        if (quantidadeVendida <= produto.getQuantidade()) {
-            novaVenda.adicionarProduto(produto, quantidadeVendida);
-            produto.setQuantidade(produto.getQuantidade() - quantidadeVendida);
-            System.out.println("Produto adicionado à venda.");
+        if (produto != null) {
+            if (quantidadeVendida <= produto.getQuantidade()) {
+                novaVenda.adicionarProduto(produto, quantidadeVendida);
+                produto.setQuantidade(produto.getQuantidade() - quantidadeVendida);
+                System.out.println("Produto adicionado à venda.");
+            } else {
+                throw new InventarioInsuficienteException();
+            }
         } else {
-            System.out.println("Quantidade insuficiente em estoque. Não foi adicionado à venda.");
+            throw new ProdutoNaoEncontradoException();
         }
-    } else {
-        System.out.println("Produto não encontrado no inventário. Não foi adicionado à venda.");
-      }
     }
 
     vendas.novaVenda(novaVenda);
