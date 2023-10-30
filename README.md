@@ -13,4 +13,4 @@ Alunos: Pedro Herique Alexandre Rocha &
 
 ## **Diagrama de Classes UML**
 
-![Diagrama de Classes UML](https://github.com/Pedroo722/Lab_4_POO/assets/132232273/59a89ab6-6063-49b2-8661-29eb9badb2d5)
+![DiagramaClasses](https://github.com/Pedroo722/Lab_4_POO/assets/132232273/84e38294-b72a-48bc-85da-8ded9a499ea6)
