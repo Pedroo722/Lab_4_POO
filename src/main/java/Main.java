@@ -63,7 +63,17 @@ public class Main {
            // Editar no Estoque
             case 2:
               System.out.println("\nInforme o ID do produto a ser editado:");
-              controller.editarProduto(scanner);
+              Integer produtoEditando = scanner.nextInt();
+              scanner.nextLine();
+
+              System.out.println("\nInforme o novo nome do produto:");
+              String novoNomeProduto = scanner.nextLine();
+              System.out.println("Informe o novo preço do produto:");
+              double novoPrecoProduto = scanner.nextDouble();
+              System.out.println("Informe a nova quantidade do produto:");
+              int novaQuantidadeProduto = scanner.nextInt();
+
+              controller.editarProduto(produtoEditando, novoNomeProduto, novoPrecoProduto, novaQuantidadeProduto);
               System.out.println("\nProduto editado com sucesso\n");
               break;
 

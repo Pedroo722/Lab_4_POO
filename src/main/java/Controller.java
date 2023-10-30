@@ -65,24 +65,15 @@ public class Controller {
   }
 
 // Caso 2. Editar um produto no Estoque
-  public void editarProduto(Scanner scanner) {
+  public void editarProduto(Integer produtoEditando, String novoNomeProduto, Double novoPrecoProduto, int novaQuantidadeProduto) {
     if (inventario.listarProdutos().isEmpty()) {
       throw new EstoqueVazioException();
     }
-
-    Integer produtoEditando = scanner.nextInt();
-    scanner.nextLine(); // Limpeza do buffer de entrada
 
     boolean produtoEncontrado = false;
 
     for (Produto produto : inventario.listarProdutos()) {
       if (produtoEditando.equals(produto.getIdentificador())) {
-        System.out.println("\nInforme o novo nome do produto:");
-        String novoNomeProduto = scanner.nextLine(); // Use o scanner aqui para capturar o nome
-        System.out.println("Informe o novo preço do produto:");
-        double novoPrecoProduto = scanner.nextDouble();
-        System.out.println("Informe a nova quantidade do produto:");
-        int novaQuantidadeProduto = scanner.nextInt();
 
         produto.setNome(novoNomeProduto);
         produto.setPreco(novoPrecoProduto);
