@@ -61,8 +61,6 @@ public class Main {
               } catch (IDInvalidoException ex) {
                 System.out.println("\n[ALERTA] Operação Falha. Esse ID já está cadastrado!\n");
                 break;
-              } catch (InventarioInsuficienteException ex) {
-                System.out.println("\n[ALERTA] Quantidade insuficiente no estoque!");
               }
 
               System.out.println("\nProduto adicionado ao estoque.\n");
@@ -141,7 +139,7 @@ public class Main {
           switch (opcaoVendas) {
            // Cadastrar uma venda
             case 1:
-              System.out.println("\nQuantos produtos a venda terá?");
+              System.out.println("\nQuantos produtos diferentes a venda terá?");
               int quantidadeDaVenda = scanner.nextInt();
 
               List<Integer> identificadoresProdutos = new ArrayList<>();
@@ -155,8 +153,12 @@ public class Main {
                   int quantidadeVendida = scanner.nextInt();
                   quantidadesVendidas.add(quantidadeVendida);
               }
+              try {
+                controller.adicionarItemVenda(identificadoresProdutos, quantidadesVendidas);
+              } catch (InventarioInsuficienteException ex) {
+                System.out.println("\n[ALERTA] Quantidade insuficiente no estoque!");
+              }
 
-              controller.adicionarItemVenda(identificadoresProdutos, quantidadesVendidas);
               System.out.println("\nVenda cadastrada!\n");
               break;
 
