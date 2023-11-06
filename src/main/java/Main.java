@@ -84,6 +84,9 @@ public class Main {
               } catch (ProdutoNaoEncontradoException ex) {
                 System.out.println("\n[ALERTA] Operação Falha. Produto não encontrado!\n");
                 break;
+              } catch (EstoqueVazioException ex) {
+                System.out.println("\n[ALERTA] Operação Falha. O estoque está vazio!\n");
+                break;
               }
 
               System.out.println("\nProduto editado com sucesso\n");
@@ -157,6 +160,10 @@ public class Main {
                 controller.adicionarItemVenda(identificadoresProdutos, quantidadesVendidas);
               } catch (InventarioInsuficienteException ex) {
                 System.out.println("\n[ALERTA] Quantidade insuficiente no estoque!");
+                break;
+              } catch (ProdutoNaoEncontradoException ex) {
+                System.out.println("\n[ALERTA] Produto não encontrado no estoque!");
+                break;
               }
 
               System.out.println("\nVenda cadastrada!\n");

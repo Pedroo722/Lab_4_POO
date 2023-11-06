@@ -3,10 +3,10 @@ package model;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Vendas {
+public class Venda {
   private List<ItemVenda> vendas;
 
-  public Vendas() {
+  public Venda() {
     vendas = new ArrayList<>();
   }
 

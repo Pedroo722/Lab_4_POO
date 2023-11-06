@@ -12,23 +12,23 @@ import exceptions.VendasVazioException;
 
 // Classes
 
-import model.Vendas;
+import model.Venda;
 import model.Produto;
 import model.ProdutoVenda;
 import model.ItemVenda;
 import model.Inventario;
 
-// Classe Principal
+// Classe Principalf
 
 public class Controller {
   private Inventario inventario;
   private ItemVenda itemVenda;
-  private Vendas vendas;
+  private Venda vendas;
 
   public Controller() {
     inventario = new Inventario();
     itemVenda = new ItemVenda();
-    vendas = new Vendas();
+    vendas = new Venda();
   }
 
 // Caso 1. Cadastrar produto no Estoque
