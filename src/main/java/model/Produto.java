@@ -5,12 +5,23 @@ public class Produto {
   private String nome;
   private double preco;
   private int quantidade;
+  private int quantidadeVendida;
 
+  // construtor inventario
   public Produto(int identificador, String nome, double preco, int quantidade) {
       this.identificador = identificador;
       this.nome = nome;
       this.preco = preco;
       this.quantidade = quantidade;
+  }
+
+  // Cnstrutor venad
+  public Produto(int identificador, String nome, double preco, int quantidade, int quantidadeVendida) {
+      this.identificador = identificador;
+      this.nome = nome;
+      this.preco = preco;
+      this.quantidade = quantidade;
+      this.quantidadeVendida = quantidadeVendida;
   }
 
   public String getNome() {
@@ -43,5 +54,9 @@ public class Produto {
 
   public void setIdentificador(int identificador) {
     this.identificador = identificador;
+  }
+
+  public int getQuantidadeVendida() {
+    return quantidadeVendida;
   }
 }

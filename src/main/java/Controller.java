@@ -146,7 +146,7 @@ public class Controller {
 
     vendas.novaVenda(novaVenda);
   }
-  
+
   public Produto buscarProdutoPorIdentificador(int identificadorProduto) {
     for (Produto produto : inventario.listarProdutos()) {
       if (identificadorProduto == produto.getIdentificador()) {
@@ -155,7 +155,7 @@ public class Controller {
     }
     return null;
   }
-    
+
  // Caso 6. Listar as vendas atuais
   public void relatorioVendas() {
     List<ItemVenda> vendas = this.vendas.listarVendas();
@@ -167,12 +167,11 @@ public class Controller {
         ItemVenda venda = vendas.get(i);
         System.out.println("Venda #" + (i + 1));
 
-        List<ProdutoVenda> produtosVenda = venda.getProdutos();
-        for (ProdutoVenda produtoVenda : produtosVenda) {
-          Produto produto = produtoVenda.getProduto();
+        List<Produto> produtosVenda = venda.getProdutos();
+        for (Produto produto : produtosVenda) {
           System.out.println("* Nome do Produto: " + produto.getNome());
           System.out.println("* Preço: " + produto.getPreco());
-          System.out.println("* Quantidade Vendida: " + produtoVenda.getQuantidadeVendida());
+          System.out.println("* Quantidade Vendida: " + produto.getQuantidadeVendida());
           System.out.println();
         }
       }
