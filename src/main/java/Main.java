@@ -154,20 +154,30 @@ public class Main {
           switch (opcaoVendas) {
            // Cadastrar uma venda
             case 1:
-              System.out.println("\nQuantos produtos diferentes a venda terá?");
-              int quantidadeDaVenda = scanner.nextInt();
 
               List<Integer> identificadoresProdutos = new ArrayList<>();
               List<Integer> quantidadesVendidas = new ArrayList();
+              
+              int contador = 1;
+              System.out.println("\nInforme o identificador do produto #" + contador + ": ");
+              System.out.println("(Aperte (N) para terminar)");
+              String identificadorProduto = scanner.next();
 
-              for (int i = 0; i < quantidadeDaVenda; i++) {
-                  System.out.println("\nInforme o identificador do produto #" + (i + 1) + ":");
-                  int identificadorProduto = scanner.nextInt();
-                  identificadoresProdutos.add(identificadorProduto);
-                  System.out.println("Informe a quantidade a ser vendida do produto #" + (i + 1) + ":");
-                  int quantidadeVendida = scanner.nextInt();
-                  quantidadesVendidas.add(quantidadeVendida);
+              while (!identificadorProduto.equals("N")) {
+                int idProd = Integer.parseInt(identificadorProduto);
+
+                identificadoresProdutos.add(idProd);
+                System.out.println("Informe a quantidade a ser vendida do produto #" + (contador) + ":");
+                int quantidadeVendida = scanner.nextInt();
+                quantidadesVendidas.add(quantidadeVendida);
+
+                contador++;
+
+                System.out.println("\nInforme o identificador do produto #" + contador + ": ");
+                System.out.println("(Aperte (N) para terminar)");
+                identificadorProduto = scanner.next();
               }
+              
               try {
                 controller.adicionarItemVenda(identificadoresProdutos, quantidadesVendidas);
               } catch (InventarioInsuficienteException ex) {

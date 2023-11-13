@@ -134,7 +134,6 @@ public class Controller {
             if (quantidadeVendida <= produto.getQuantidade()) {
                 novaVenda.adicionarProduto(produto, quantidadeVendida);
                 produto.setQuantidade(produto.getQuantidade() - quantidadeVendida);
-                System.out.println("Produto adicionado à venda.");
             } else {
                 throw new InventarioInsuficienteException();
             }
