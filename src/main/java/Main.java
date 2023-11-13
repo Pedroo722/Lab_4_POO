@@ -9,6 +9,10 @@ import exceptions.NumeroVendaInvalidoException;
 import exceptions.ProdutoNaoEncontradoException;
 import exceptions.VendasVazioException;
 
+import validators.DoubleValidator;
+import validators.IntValidator;
+import validators.StringValidator;
+
 public class Main {
   public static void main(String[] args) {
     Controller controller = new Controller();
