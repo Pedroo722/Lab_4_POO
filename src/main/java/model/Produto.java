@@ -7,7 +7,7 @@ public class Produto {
   private int quantidade;
   private int quantidadeVendida;
 
-  // construtor inventario
+  // Construtor do Inventario
   public Produto(int identificador, String nome, double preco, int quantidade) {
       this.identificador = identificador;
       this.nome = nome;
@@ -15,7 +15,7 @@ public class Produto {
       this.quantidade = quantidade;
   }
 
-  // Cnstrutor venad
+  // Construtor para Vendas
   public Produto(int identificador, String nome, double preco, int quantidade, int quantidadeVendida) {
       this.identificador = identificador;
       this.nome = nome;
@@ -58,5 +58,9 @@ public class Produto {
 
   public int getQuantidadeVendida() {
     return quantidadeVendida;
+  }
+
+  public void setQuantidadeVendida(int quantidadeVendida) {
+    this.quantidadeVendida = quantidadeVendida;
   }
 }

@@ -11,8 +11,7 @@ public class ItemVenda {
   }
 
   public void adicionarProduto(Produto produto, int quantidadeVendida) {
-    // produtos.add(new Produto(produto.getIdentificador(), produto.getNome(), produto.getPreco(), produto.quantidadeVendida));
-    produtos.add(new ProdutoVenda(produto, quantidadeVendida));
+    produtos.add(new Produto(produto.getIdentificador(), produto.getNome(), produto.getPreco(), produto.getQuantidade(), quantidadeVendida));
   }
 
   public List<Produto> getProdutos() {

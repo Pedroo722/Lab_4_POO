@@ -14,7 +14,6 @@ import exceptions.VendasVazioException;
 
 import model.Venda;
 import model.Produto;
-import model.ProdutoVenda;
 import model.ItemVenda;
 import model.Inventario;
 
