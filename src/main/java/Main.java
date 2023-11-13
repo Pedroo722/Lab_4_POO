@@ -56,14 +56,22 @@ public class Main {
               System.out.println("Informe a quantidade do produto a ser adicionada no estoque:");
               Integer quantidadeProduto = scanner.nextInt();
 
-              try {
-                controller.cadastrarProduto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
-              } catch (IDInvalidoException ex) {
-                System.out.println("\n[ALERTA] Operação Falha. Esse ID já está cadastrado!\n");
-                break;
-              }
+              // Validar os dados usando os Validators
+              boolean isIdValid = new IntValidator().validate(identificadorProduto);
+              boolean isNomeValid = new StringValidator().validate(nomeProduto);
+              boolean isPrecoValid = new DoubleValidator().validate(precoProduto);
+              boolean isQuantidadeValid = new IntValidator().validate(quantidadeProduto);
 
-              System.out.println("\nProduto adicionado ao estoque.\n");
+              if (isIdValid && isNomeValid && isPrecoValid && isQuantidadeValid) {
+                  try {
+                      controller.cadastrarProduto(identificadorProduto, nomeProduto, precoProduto, quantidadeProduto);
+                      System.out.println("\nProduto adicionado ao estoque.\n");
+                  } catch (IDInvalidoException ex) {
+                      System.out.println("\n[ALERTA] Operação Falha. Esse ID já está cadastrado!\n");
+                  }
+              } else {
+                  System.out.println("\n[ALERTA] Dados do produto inválidos. Por favor, verifique as informações e tente novamente.\n");
+              }
               break;
 
            // Editar no Estoque
