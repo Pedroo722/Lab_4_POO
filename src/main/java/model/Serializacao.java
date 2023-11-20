@@ -1,43 +1,37 @@
 package model;
-import java.io.*;
 
-public class Serializacao
-{
-   public static void main(String [] args) throws FileNotFoundException
-   {
-        Inventario i = new Inventario();
-        try
-{
-         FileOutputStream fileOut =
-         new FileOutputStream("invetario.ser");
-         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-         out.writeObject(i);
-         out.close();
-         fileOut.close();
-         System.out.printf("Serialized data is saved in invetario.ser");
-      }catch(IOException e)
-      {
+import java.io.*;
+import java.util.List;
+
+public class Serializacao {
+   public static void main(String [] args) throws FileNotFoundException {
+        List<Produto> i = new ArrayList<>();
+
+        try {
+            FileOutputStream fileOut =
+            new FileOutputStream("data.bin");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(i);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in data.bin");
+        } catch (IOException e) {
           e.printStackTrace();
-      } 
+        } 
 
        
-        FileInputStream fis = new FileInputStream("invetario.ser");
-        try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-            for (Produto produto : i.listarProdutos()) {
-                Produto p2 = (Produto) ois.readObject();
-              }
-            System.out.printf(" AAA");//"%d %s %.2f %d", p2.getIdentificador(), p2.getNome(), p2.getPreco(), p2.getQuantidade());
+        File data = new File("data.bin");
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.bin"))) {
+            i = (List<Produto>) ois.readObject();
+            System.out.printf(" Serializou AAA");
         } catch (FileNotFoundException e) {
             throw e;
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } 
-        
+        }
 
+        
+        
     /*
       Produto p = new Produto(123, "bala", 11.5, 15);
 
@@ -70,5 +64,8 @@ public class Serializacao
             // TODO Auto-generated catch block
             e.printStackTrace();
         } */
+
+
+         
    }
 }
