@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inventario {
+public class Inventario implements Serializable {
   private List<Produto> estoque;
 
   public Inventario() {
