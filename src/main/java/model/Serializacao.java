@@ -1,12 +1,16 @@
 package model;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Serializacao {
    public static void main(String [] args) throws FileNotFoundException {
         List<Produto> i = new ArrayList<>();
-
+        i.add(new Produto(0, "arroz", 10, 10));
+        i.add(new Produto(1, "feijao", 20, 10));
+        i.add(new Produto(2, "acucar", 30, 10));
+        
         try {
             FileOutputStream fileOut =
             new FileOutputStream("data.bin");
@@ -24,6 +28,7 @@ public class Serializacao {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.bin"))) {
             i = (List<Produto>) ois.readObject();
             System.out.printf(" Serializou AAA");
+            i.forEach(p -> System.out.println(p.getNome()));
         } catch (FileNotFoundException e) {
             throw e;
         } catch (IOException | ClassNotFoundException e) {
