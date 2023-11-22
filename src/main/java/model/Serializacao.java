@@ -10,7 +10,8 @@ public class Serializacao {
         i.add(new Produto(0, "arroz", 10, 10));
         i.add(new Produto(1, "feijao", 20, 10));
         i.add(new Produto(2, "acucar", 30, 10));
-        
+
+
         try {
             FileOutputStream fileOut =
             new FileOutputStream("data.bin");
@@ -34,7 +35,6 @@ public class Serializacao {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         
         
     /*

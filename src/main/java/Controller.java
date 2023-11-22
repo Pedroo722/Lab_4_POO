@@ -30,6 +30,11 @@ public class Controller {
     vendas = new Venda();
   }
 
+
+// Serialização
+
+  
+
 // Caso 1. Cadastrar produto no Estoque
   public void cadastrarProduto(Integer identificadorProduto, String nomeProduto, double precoProduto, int quantidadeProduto) {
     for (Produto produto : inventario.listarProdutos()) {

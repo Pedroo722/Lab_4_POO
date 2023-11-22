@@ -11,7 +11,7 @@ public class MainWindow {
     public MainWindow() {
         frame = new JFrame("Ponto de Venda");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 100);
+        frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
 
         JPanel buttonPanel = new JPanel();

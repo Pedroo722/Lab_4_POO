@@ -7,13 +7,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EstoqueWindow {
+public class EstoqueCadastroWindow {
     private final JFrame frame;
 //    private final JList<Produto> list;
     private final JPopupMenu menu;
 //    private final DefaultListModel<Produto> listModel;
 
-    public EstoqueWindow() {
+    public EstoqueCadastroWindow() {
         frame = new JFrame("Estoque");
      //   list = new JList<>();
      //   listModel = new DefaultListModel<>();
@@ -21,21 +21,10 @@ public class EstoqueWindow {
         menu = new JPopupMenu();
 
         JButton adicionarButton = new JButton("Adicionar Produto");
-        adicionarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openEstoqueScreen();
-            }
+        adicionarButton.addActionListener(e -> {
+            // add prod
         });
 
-        JButton editarButton = new JButton("Editar Produto");
-        editarButton.addActionListener(e -> {
-            // edit prd
-        });
-
-        JButton excluirButton = new JButton("Excluir Produto");
-        excluirButton.addActionListener(e -> {
-            // del prod
-        });
 
         JButton voltarButton = new JButton("Voltar");
         voltarButton.addActionListener(new ActionListener() {
@@ -49,8 +38,6 @@ public class EstoqueWindow {
         panelButtons.setLayout(new GridLayout(2, 2, 10, 10));
         panelButtons.setPreferredSize(new Dimension(400, 50));
         panelButtons.add(adicionarButton);
-        panelButtons.add(editarButton);
-        panelButtons.add(excluirButton);
         panelButtons.add(voltarButton);
 
 //        list.setPreferredSize(new Dimension(400, 200));
@@ -90,11 +77,6 @@ public class EstoqueWindow {
 //            }
 //        }
 //    }
-    private void openEstoqueScreen() {
-        EstoqueCadastroWindow cadastroProdWindow = new EstoqueCadastroWindow();
-        cadastroProdWindow.show();
-    }
-
 
     public void show() {
         frame.setSize(400, 300);
