@@ -30,12 +30,7 @@ public class Controller {
     vendas = new Venda();
   }
 
-
-// Serialização
-
-  
-
-// Caso 1. Cadastrar produto no Estoque
+  // Caso 1. Cadastrar produto no Estoque
   public void cadastrarProduto(Integer identificadorProduto, String nomeProduto, double precoProduto, int quantidadeProduto) {
     for (Produto produto : inventario.listarProdutos()) {
       if (identificadorProduto.equals(produto.getIdentificador())) {
@@ -47,7 +42,7 @@ public class Controller {
     inventario.adicionarProduto(novoProduto);
   }
 
-// Caso 2. Editar um produto no Estoque
+  // Caso 2. Editar um produto no Estoque
   public void editarProduto(Integer produtoEditando, String novoNomeProduto, Double novoPrecoProduto, int novaQuantidadeProduto) {
     if (inventario.listarProdutos().isEmpty()) {
       throw new EstoqueVazioException();
@@ -72,42 +67,18 @@ public class Controller {
     }
   }
 
-// Caso 3. Listar os produtos do Estoque
-  public void listarProdutos() {
+  // Caso 3. Listar os produtos do Estoque
+  public List<Produto> listarProdutos() {
     List<Produto> produtosNoEstoque = inventario.listarProdutos();
 
     if (produtosNoEstoque.isEmpty()) {
       throw new EstoqueVazioException();
     }
 
-    List<Produto> produtosBaixaQuantidade = new ArrayList<>();
-
-    for (int i = 0; i < produtosNoEstoque.size(); i++) {
-      Produto produto = produtosNoEstoque.get(i);
-      System.out.println("Produto #" + (i + 1));
-      System.out.println("ID: " + produto.getIdentificador());
-      System.out.println("Nome: " + produto.getNome());
-      System.out.println("Preço: " + produto.getPreco());
-      System.out.println("Quantidade Atual: " + produto.getQuantidade());
-      System.out.println();
-
-      if (produto.getQuantidade() < 5) {
-        produtosBaixaQuantidade.add(produto);
-      }
-    }
-
-    if (!produtosBaixaQuantidade.isEmpty()) {
-      System.out.println("[ALERTA] Produtos em baixa quantidade:");
-      for (Produto produto : produtosBaixaQuantidade) {
-        System.out.print("* ");
-        System.out.println(produto.getNome());
-      }
-    }
-    System.out.println();
-
+    return produtosNoEstoque;
   }
 
-// Caso 4. Remover um produto especifico do Estoque
+  // Caso 4. Remover um produto especifico do Estoque
   public void removerProduto(Integer idProdutoRemover) {
     List<Produto> produtos = inventario.listarProdutos();
     boolean produtoEncontrado = false;
@@ -125,7 +96,7 @@ public class Controller {
     }
   }
 
- // Caso 5. Cadastrar uma venda
+  // Caso 5. Cadastrar uma venda
   public void adicionarItemVenda(List<Integer> identificadoresProdutos, List<Integer> quantidadesVendidas) {
     ItemVenda novaVenda = new ItemVenda();
 
@@ -159,35 +130,23 @@ public class Controller {
     return null;
   }
 
- // Caso 6. Listar as vendas atuais
-  public void relatorioVendas() {
+  // Caso 6. Listar as vendas atuais
+  public List<ItemVenda> relatorioVendas() {
     List<ItemVenda> vendas = this.vendas.listarVendas();
 
     if (vendas.isEmpty()) {
       throw new VendasVazioException();
     } else {
-      for (int i = 0; i < vendas.size(); i++) {
-        ItemVenda venda = vendas.get(i);
-        System.out.println("Venda #" + (i + 1));
-
-        List<Produto> produtosVenda = venda.getProdutos();
-        for (Produto produto : produtosVenda) {
-          System.out.println("* Nome do Produto: " + produto.getNome());
-          System.out.println("* Preço: " + produto.getPreco());
-          System.out.println("* Quantidade Vendida: " + produto.getQuantidadeVendida());
-          System.out.println();
-        }
-      }
+      return vendas;
     }
   }
 
- // Caso 7. Apagar uma venda
+  // Caso 7. Apagar uma venda
   public void apagarVenda(int numeroVenda) {
     if (numeroVenda <= 0 || numeroVenda > vendas.listarVendas().size()) {
       throw new NumeroVendaInvalidoException();
     }
 
     ItemVenda vendaRemovida = vendas.listarVendas().remove(numeroVenda - 1);
-    System.out.println("Venda #" + numeroVenda + " removida com sucesso.\n");
   }
 }
