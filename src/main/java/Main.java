@@ -5,6 +5,10 @@ import java.util.Scanner;
 import model.Produto;
 import model.ItemVenda;
 
+import validators.DoubleValidator;
+import validators.IntValidator;
+import validators.StringValidator;
+
 import exceptions.EstoqueVazioException;
 import exceptions.IDInvalidoException;
 import exceptions.InventarioInsuficienteException;
