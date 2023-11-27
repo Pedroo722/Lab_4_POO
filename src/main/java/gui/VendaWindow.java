@@ -23,6 +23,9 @@ public class VendaWindow {
               JLabel labelNome = new JLabel("Nome: ");
               JTextField campoNome = new JTextField(18);
               campoNome.setSize(100, 20);
+
+              VendaCadastroWindow cadastroProdWindow = new VendaCadastroWindow();
+              cadastroProdWindow.show();
             }
         });
 
