@@ -15,6 +15,7 @@ import exceptions.InventarioInsuficienteException;
 import exceptions.NumeroVendaInvalidoException;
 import exceptions.ProdutoNaoEncontradoException;
 import exceptions.VendasVazioException;
+import gerenciador.Controller;
 
 public class Main {
   public static void main(String[] args) {
