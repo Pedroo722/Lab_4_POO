@@ -1,88 +1,69 @@
-package gui;
+package gui; 
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EstoqueCadastroWindow {
-    private final JFrame frame;
-//    private final JList<Produto> list;
-    private final JPopupMenu menu;
-//    private final DefaultListModel<Produto> listModel;
+public class EstoqueCadastroWindow extends JFrame {
+
+    private JTextField nomeTextField, valorTextField, quantidadeTextField;
 
     public EstoqueCadastroWindow() {
-        frame = new JFrame("Estoque");
-     //   list = new JList<>();
-     //   listModel = new DefaultListModel<>();
-     //   list.setModel(listModel);
-        menu = new JPopupMenu();
+        super("Cadastro de Produto");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 200);
 
-        JButton adicionarButton = new JButton("Adicionar Produto");
-        adicionarButton.addActionListener(e -> {
-            // add prod
-        });
+        // Painel principal
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2));
 
+        // Adiciona barras de entrada e rótulos
+        panel.add(new JLabel("Nome:"));
+        nomeTextField = new JTextField();
+        panel.add(nomeTextField);
 
+        panel.add(new JLabel("Valor:"));
+        valorTextField = new JTextField();
+        panel.add(valorTextField);
+
+        panel.add(new JLabel("Quantidade:"));
+        quantidadeTextField = new JTextField();
+        panel.add(quantidadeTextField);
+
+        // Adiciona botões
         JButton voltarButton = new JButton("Voltar");
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                // Adicione a lógica para lidar com o botão "Voltar" aqui
             }
         });
+        panel.add(voltarButton);
 
-        JPanel panelButtons = new JPanel();
-        panelButtons.setLayout(new GridLayout(2, 2, 10, 10));
-        panelButtons.setPreferredSize(new Dimension(400, 50));
-        panelButtons.add(adicionarButton);
-        panelButtons.add(voltarButton);
+        JButton cadastrarButton = new JButton("Cadastrar Produto");
+        cadastrarButton.setBackground(Color.GREEN);
+        cadastrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Adicione a lógica para lidar com o botão "Cadastrar Produto" aqui
+            }
+        });
+        panel.add(cadastrarButton);
 
-//        list.setPreferredSize(new Dimension(400, 200));
+        // Adiciona o painel ao quadro
+        add(panel);
 
-//        list.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-//                    // abrir janela edição prod
-//                }
-//            }
-
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                showContextMenu(e);
-//            }
-
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
-//                showContextMenu(e);
-//            }
-//        });
-
-//        JScrollPane listScroller = new JScrollPane(list);
-
-        frame.setLayout(new BorderLayout());
-        frame.add(panelButtons, BorderLayout.PAGE_START);
-//        frame.add(listScroller, BorderLayout.CENTER);
+        // Centraliza a janela
+        setLocationRelativeTo(null);
     }
 
-//    private void showContextMenu(MouseEvent e) {
-//        if (e.isPopupTrigger()) {
-//            int index = list.locationToIndex(e.getPoint());
-//            if (index >= 0 && index < listModel.size()) {
-//                list.setSelectedIndex(index);
-//                menu.show(e.getComponent(), e.getX(), e.getY());
-//            }
-//        }
-//    }
-
-    public void show() {
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new EstoqueCadastroWindow().setVisible(true);
+            }
+        });
     }
-
 }

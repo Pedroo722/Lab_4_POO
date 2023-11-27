@@ -1,24 +1,22 @@
 package gui;
 
+import gerenciador.Controller;
+import model.Produto;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EstoqueWindow {
     private final JFrame frame;
-//    private final JList<Produto> list;
-    private final JPopupMenu menu;
-//    private final DefaultListModel<Produto> listModel;
+    private final JTextArea textArea;
 
     public EstoqueWindow() {
         frame = new JFrame("Estoque");
-     //   list = new JList<>();
-     //   listModel = new DefaultListModel<>();
-     //   list.setModel(listModel);
-        menu = new JPopupMenu();
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
 
         JButton adicionarButton = new JButton("Adicionar Produto");
         adicionarButton.addActionListener(new ActionListener() {
@@ -53,48 +51,15 @@ public class EstoqueWindow {
         panelButtons.add(excluirButton);
         panelButtons.add(voltarButton);
 
-//        list.setPreferredSize(new Dimension(400, 200));
-
-//        list.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-//                    // abrir janela edição prod
-//                }
-//            }
-
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                showContextMenu(e);
-//            }
-
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
-//                showContextMenu(e);
-//            }
-//        });
-
-//        JScrollPane listScroller = new JScrollPane(list);
-
         frame.setLayout(new BorderLayout());
         frame.add(panelButtons, BorderLayout.PAGE_START);
-//        frame.add(listScroller, BorderLayout.CENTER);
+        frame.add(scrollPane, BorderLayout.CENTER);
     }
 
-//    private void showContextMenu(MouseEvent e) {
-//        if (e.isPopupTrigger()) {
-//            int index = list.locationToIndex(e.getPoint());
-//            if (index >= 0 && index < listModel.size()) {
-//                list.setSelectedIndex(index);
-//                menu.show(e.getComponent(), e.getX(), e.getY());
-//            }
-//        }
-//    }
     private void openEstoqueScreen() {
         EstoqueCadastroWindow cadastroProdWindow = new EstoqueCadastroWindow();
         cadastroProdWindow.show();
     }
-
 
     public void show() {
         frame.setSize(400, 300);
@@ -102,5 +67,4 @@ public class EstoqueWindow {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
 }
