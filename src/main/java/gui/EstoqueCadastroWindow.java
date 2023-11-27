@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EstoqueCadastroWindow extends JFrame {
-
+    private JFrame frame;
     private JTextField nomeTextField, valorTextField, quantidadeTextField;
 
     public EstoqueCadastroWindow() {
@@ -36,7 +36,9 @@ public class EstoqueCadastroWindow extends JFrame {
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Adicione a lógica para lidar com o botão "Voltar" aqui
+                frame.setVisible(false);
+                EstoqueWindow estoqueWindow = new EstoqueWindow();
+                estoqueWindow.show();
             }
         });
         panel.add(voltarButton);

@@ -9,10 +9,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EstoqueWindow {
-    private final JFrame frame;
-    private final JTextArea textArea;
+    private JFrame frame;
+    private JTextArea textArea;
+    private JFrame MainWindow; 
 
     public EstoqueWindow() {
+        InitComponents();
+    }
+
+    public EstoqueWindow(JFrame MainWindow) {
+        this.MainWindow = MainWindow;
+        InitComponents();
+    }
+
+    private void InitComponents() {
         frame = new JFrame("Estoque");
         textArea = new JTextArea();
         textArea.setEditable(false);
@@ -39,7 +49,9 @@ public class EstoqueWindow {
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                frame.setVisible(false);
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.show();
             }
         });
 

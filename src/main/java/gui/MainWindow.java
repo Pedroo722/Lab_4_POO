@@ -40,11 +40,13 @@ public class MainWindow {
     }
 
     private void openEstoqueScreen() {
+      this.frame.setVisible(false);
       EstoqueWindow estoqueWindow = new EstoqueWindow();
         estoqueWindow.show();
     }
 
     private void openVendasScreen() {
+      this.frame.setVisible(false);
       VendaWindow vendaWindow = new VendaWindow();
       vendaWindow.show();
     }
