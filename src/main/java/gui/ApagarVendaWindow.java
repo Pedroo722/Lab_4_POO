@@ -3,70 +3,88 @@ package gui;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class ApagarVendaWindow extends JFrame {
 
-    private JButton jButton6;
-    private JLabel jLabel1;
-    private JList<String> jList1;
-    private JScrollPane jScrollPane1;
+    private JLabel jLabelApagarVenda;
+    private JScrollPane jScrollPaneVenda;
+    private JTable jTableVenda;
+    private JButton jButtonApagarVenda;
 
     public ApagarVendaWindow() {
         initComponents();
     }
 
     private void initComponents() {
-        jButton6 = new JButton();
-        jLabel1 = new JLabel();
-        jScrollPane1 = new JScrollPane();
-        jList1 = new JList<>();
+        jLabelApagarVenda = new JLabel();
+        jScrollPaneVenda = new JScrollPane();
+        jTableVenda = new JTable();
+        jButtonApagarVenda = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(869, 570));
+        setMinimumSize(new java.awt.Dimension(869, 570));
+        setResizable(false);
 
-        jButton6.setBackground(new java.awt.Color(255, 0, 0));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
-        jButton6.setText("X");
+        jLabelApagarVenda.setFont(new java.awt.Font("Segoe UI", 1, 36));
+        jLabelApagarVenda.setText("Apagar Venda");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel1.setText("Apagar Venda");
+        jTableVenda.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        jTableVenda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Produto", "Unidades Vendidas"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPaneVenda.setViewportView(jTableVenda);
+
+        jButtonApagarVenda.setBackground(new java.awt.Color(153, 255, 51));
+        jButtonApagarVenda.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        jButtonApagarVenda.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonApagarVenda.setText("Apagar Venda");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 381, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelApagarVenda)
+                        .addGap(247, 247, 247))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonApagarVenda)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPaneVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 281, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1)
-                .addGap(52, 52, 52)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabelApagarVenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jButtonApagarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPaneVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
         pack();

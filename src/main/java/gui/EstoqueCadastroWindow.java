@@ -7,133 +7,146 @@ import javax.swing.JTextField;
 
 public class EstoqueCadastroWindow extends JFrame {
 
-    private JButton jButton1;
-    private JButton jButton2;
-    private JButton jButton5;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JTextField jTextField1;
-    private JTextField jTextField2;
-    private JTextField jTextField3;
+    private JLabel jLabelCadastroProduto;
+    private JLabel jLabelQuantidade;
+    private JButton jButtonVoltar;
+    private JButton jButtonCadastrar;
+    private JTextField jTextFieldQuantidade;
+    private JLabel jLabelNome;
+    private JTextField jTextFieldNome;
+    private JTextField jTextFieldValor;
+    private JLabel jLabelValor;
 
     public EstoqueCadastroWindow() {
         initComponents();
     }
 
     private void initComponents() {
-        jLabel1 = new JLabel();
-        jTextField2 = new JTextField();
-        jLabel2 = new JLabel();
-        jLabel3 = new JLabel();
-        jTextField3 = new JTextField();
-        jLabel4 = new JLabel();
-        jTextField1 = new JTextField();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
-        jButton5 = new JButton();
+        jLabelCadastroProduto = new JLabel();
+        jLabelQuantidade = new JLabel();
+        jButtonVoltar = new JButton();
+        jButtonCadastrar = new JButton();
+        jTextFieldQuantidade = new JTextField();
+        jLabelNome = new JLabel();
+        jTextFieldNome = new JTextField();
+        jTextFieldValor = new JTextField();
+        jLabelValor = new JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(869, 570));
+        setMinimumSize(new java.awt.Dimension(869, 570));
+        setPreferredSize(new java.awt.Dimension(869, 570));
+        setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        jLabel1.setText("Nome:");
+        jLabelCadastroProduto.setFont(new java.awt.Font("Segoe UI", 1, 36));
+        jLabelCadastroProduto.setText("Cadastro de Produto");
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jLabelQuantidade.setText("Quantidade:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel2.setText("Cadastro de Produto");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        jLabel3.setText("Valor:");
-
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        jLabel4.setText("Quantidade:");
-
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Voltar");
-
-        jButton2.setBackground(new java.awt.Color(102, 255, 102));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Cadastrar");
-
-        jButton5.setBackground(new java.awt.Color(255, 0, 0));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("X");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVoltar.setBackground(new java.awt.Color(204, 204, 255));
+        jButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonVoltarActionPerformed(evt);
             }
         });
+
+        jButtonCadastrar.setBackground(new java.awt.Color(102, 255, 102));
+        jButtonCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jButtonCadastrar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarActionPerformed(evt);
+            }
+        });
+
+        jTextFieldQuantidade.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabelNome.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jLabelNome.setText("Nome:");
+
+        jTextFieldNome.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextFieldValor.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabelValor.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jLabelValor.setText("Valor:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(158, 158, 158)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                        .addComponent(jButtonVoltar)
+                        .addGap(222, 222, 222)
+                        .addComponent(jButtonCadastrar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelValor)
+                            .addGap(72, 72, 72)
+                            .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabelQuantidade)
+                                .addComponent(jLabelNome))
+                            .addGap(72, 72, 72)
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelCadastroProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
+                .addComponent(jLabelCadastroProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNome)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelValor)
+                    .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(jLabelQuantidade)
+                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65))
         );
 
         pack();
     }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-        this.dispose(); // Fechar a janela ao clicar em "X"
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void jTextFieldQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void jTextFieldValorActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
     public static void main(String args[]) {
