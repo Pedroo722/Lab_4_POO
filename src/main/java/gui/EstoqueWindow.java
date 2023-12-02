@@ -15,10 +15,12 @@ public class EstoqueWindow extends JFrame {
     private JButton jButtonEditarProduto;
     private JScrollPane jScrollPaneEstoque;
     private JTable jTableEstoque;
-    
+    private ScreenManager screenManager;
 
-    public EstoqueWindow() {
+    public EstoqueWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
+        setTableModel();
     }
 
     private void initComponents() {
@@ -150,9 +152,7 @@ public class EstoqueWindow extends JFrame {
     }
 
     private void jButtonAdicionaProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        EstoqueCadastroWindow cadastroProdutoWindow = new EstoqueCadastroWindow();
-        cadastroProdutoWindow.setVisible(true);
-        this.setVisible(false);
+        screenManager.showAdicionarProdutoWindow();
     }
 
     private void jButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,15 +162,40 @@ public class EstoqueWindow extends JFrame {
     }
 
     private void jButtonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        EditarProdutoWindow editarWindow = new EditarProdutoWindow();
-        editarWindow.setVisible(true);
-        this.setVisible(false);
+        screenManager.showEditarProdutoWindow();
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.setVisible(true);
-        this.setVisible(false);
+        screenManager.showMainWindow();
+    }
+
+
+
+    private void setTableModel() {
+        // Dados de exemplo para preencher a tabela
+        Object[][] data = {
+            {1, "Produto A", 10.0, 50},
+            {2, "Produto B", 15.0, 30},
+            {3, "Produto C", 20.0, 25},
+            {4, "Produto D", 18.5, 40},
+            // Adicione mais linhas conforme necessário
+        };
+    
+        String[] columnNames = {"ID", "Descrição", "Preço", "Quantidade no Estoque"};
+    
+        // Configure o modelo da tabela com os dados
+        jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
+            Class[] types = new Class[]{
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+            };
+    
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        });
+
+        jTableEstoque.setFillsViewportHeight(true);
+
     }
 
     public static void main(String args[]) {
@@ -190,11 +215,16 @@ public class EstoqueWindow extends JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EstoqueWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+    
+        // Crie uma instância de ScreenManager
+        ScreenManager screenManager = new ScreenManager();
+    
+        // Passe o ScreenManager ao criar a instância de EstoqueWindow
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EstoqueWindow().setVisible(true);
+                new EstoqueWindow(screenManager).setVisible(true);
             }
         });
     }
+    
 }

@@ -16,8 +16,10 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
     private JTextField jTextFieldNome;
     private JTextField jTextFieldValor;
     private JTextField jTextFieldQuantidade;
-    
-    public AdicionarProdutoWindow() {
+    private ScreenManager screenManager;
+
+    public AdicionarProdutoWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
     }
 
@@ -133,9 +135,7 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-        EstoqueWindow estoqueWindow = new EstoqueWindow();
-        estoqueWindow.setVisible(true);
-        this.setVisible(false);
+        screenManager.showEstoqueWindow();
     }
 
 
@@ -157,9 +157,11 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdicionarProdutoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        ScreenManager screenManager = new ScreenManager();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdicionarProdutoWindow().setVisible(true);
+                new AdicionarProdutoWindow(screenManager).setVisible(true);
             }
         });
     }

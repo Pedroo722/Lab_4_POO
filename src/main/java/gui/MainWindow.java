@@ -10,7 +10,10 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public MainWindow() {
+    private ScreenManager screenManager;
+
+    public MainWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
     }
 
@@ -28,11 +31,16 @@ public class MainWindow extends javax.swing.JFrame {
         jButtonEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jButtonEstoque.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEstoque.setText("Estoque");
-
+        jButtonEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEstoqueActionPerformed(evt);
+            }
+        });
+    
         jButtonVendas.setBackground(new java.awt.Color(153, 153, 255));
         jButtonVendas.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jButtonVendas.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonVendas.setText("Vendas");
+        jButtonVendas.setText("Vendas");  
         jButtonVendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVendasActionPerformed(evt);
@@ -72,9 +80,14 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }
 
-    private void jButtonVendasActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void jButtonEstoqueActionPerformed(java.awt.event.ActionEvent evt) {
+        screenManager.showEstoqueWindow();
     }
+    
+    private void jButtonVendasActionPerformed(java.awt.event.ActionEvent bvt) {
+        screenManager.showVendaWindow();
+    }
+    
 
     public static void main(String args[]) {
         try {
@@ -93,10 +106,14 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+    
+        // Crie uma instância de ScreenManager
+        ScreenManager screenManager = new ScreenManager();
+    
+        // Passe o ScreenManager ao criar a instância de MainWindow
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                new MainWindow(screenManager).setVisible(true);
             }
         });
     }

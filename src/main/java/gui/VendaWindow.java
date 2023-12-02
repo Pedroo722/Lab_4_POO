@@ -4,13 +4,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.GroupLayout;
 
 public class VendaWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form VendaWindow
      */
-    public VendaWindow() {
+    private ScreenManager screenManager;
+
+    public VendaWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
     }
 
@@ -43,6 +47,11 @@ public class VendaWindow extends javax.swing.JFrame {
         JButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
         JButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
         JButtonVoltar.setText("Voltar");
+        JButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jTextAreaVenda.setColumns(20);
         jTextAreaVenda.setRows(5);
@@ -87,6 +96,10 @@ public class VendaWindow extends javax.swing.JFrame {
         pack();
     }
 
+    private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+        screenManager.showMainWindow();
+    }
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -104,10 +117,14 @@ public class VendaWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VendaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+    
+        // Crie uma instância de ScreenManager
+        ScreenManager screenManager = new ScreenManager();
+    
+        // Passe o ScreenManager ao criar a instância de VendaWindow
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VendaWindow().setVisible(true);
+                new VendaWindow(screenManager).setVisible(true);
             }
         });
     }

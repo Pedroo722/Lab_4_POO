@@ -11,6 +11,7 @@ public class ExcluirProdutoWindow extends JFrame {
     private JLabel jLabelExcluirProduto;
     private JTable jTableEstoque;
     private JButton jButtonExcluirProduto;
+    private JScrollPane jScrollPaneEstoque;
 
     public ExcluirProdutoWindow() {
         initComponents();

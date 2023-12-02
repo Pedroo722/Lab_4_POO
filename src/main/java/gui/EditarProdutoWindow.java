@@ -16,8 +16,10 @@ public class EditarProdutoWindow extends JFrame {
     private JTextField jTextFieldNome;
     private JLabel jLabelQuantidade;
     private JTextField jTextFieldValor;
+    private ScreenManager screenManager;
 
-    public EditarProdutoWindow() {
+    public EditarProdutoWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
     }
 
@@ -145,11 +147,12 @@ public class EditarProdutoWindow extends JFrame {
             java.util.logging.Logger.getLogger(EditarProdutoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        ScreenManager screenManager = new ScreenManager();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarProdutoWindow().setVisible(true);
+                new EditarProdutoWindow(screenManager).setVisible(true);
             }
         });
     }
 }
-
