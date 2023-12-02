@@ -1,15 +1,15 @@
 package gui;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class MainWindow extends JFrame {
+public class MainWindow extends javax.swing.JFrame {
 
-    private JButton jButtonEstoque;
-    private JButton jButtonVendas;
-    private JLabel jLabelMenu;
-
+    /**
+     * Creates new form NewJFrame
+     */
     public MainWindow() {
         initComponents();
     }
@@ -22,19 +22,12 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(557, 428));
         setMinimumSize(new java.awt.Dimension(557, 428));
-        setName("fraMainWindow"); // NOI18N
-        setUndecorated(true);
         setResizable(false);
 
         jButtonEstoque.setBackground(new java.awt.Color(153, 153, 255));
         jButtonEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jButtonEstoque.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEstoque.setText("Estoque");
-        jButtonEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEstoqueActionPerformed(evt);
-            }
-        });
 
         jButtonVendas.setBackground(new java.awt.Color(153, 153, 255));
         jButtonVendas.setFont(new java.awt.Font("Segoe UI", 0, 18));
@@ -49,7 +42,7 @@ public class MainWindow extends JFrame {
         jLabelMenu.setFont(new java.awt.Font("Segoe UI", 1, 24));
         jLabelMenu.setText("Menu");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,15 +73,7 @@ public class MainWindow extends JFrame {
     }
 
     private void jButtonVendasActionPerformed(java.awt.event.ActionEvent evt) {
-        VendaWindow vendaWindow = new VendaWindow();
-        vendaWindow.setVisible(true);
-        this.setVisible(false);
-    }
-
-    private void jButtonEstoqueActionPerformed(java.awt.event.ActionEvent evt) {
-        EstoqueWindow estoqueWindow = new EstoqueWindow();
-        estoqueWindow.setVisible(true);
-        this.setVisible(false);
+        // TODO add your handling code here:
     }
 
     public static void main(String args[]) {
@@ -105,7 +90,7 @@ public class MainWindow extends JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.   UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -114,7 +99,9 @@ public class MainWindow extends JFrame {
                 new MainWindow().setVisible(true);
             }
         });
-
     }
-}
 
+    private javax.swing.JButton jButtonEstoque;
+    private javax.swing.JButton jButtonVendas;
+    private javax.swing.JLabel jLabelMenu;
+}
