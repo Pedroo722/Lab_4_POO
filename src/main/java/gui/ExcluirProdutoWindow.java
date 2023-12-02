@@ -1,26 +1,24 @@
 package gui;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.JTextField;
 
-public class ExcluirProdutoWindow extends JFrame {
+public class ExcluirProdutoWindow extends javax.swing.JFrame {
 
-    private JLabel jLabelExcluirProduto;
-    private JTable jTableEstoque;
-    private JButton jButtonExcluirProduto;
-    private JScrollPane jScrollPaneEstoque;
-
+    /**
+     * Creates new form ExcluirProdutoWindow
+     */
     public ExcluirProdutoWindow() {
         initComponents();
     }
 
     private void initComponents() {
         jLabelExcluirProduto = new JLabel();
-        jTableEstoque = new JTable();
-        jButtonExcluirProduto = new JButton();
+        JButtonExcluirProduto = new JButton();
+        JButtonVoltar = new JButton();
+        jLabelIdProduto = new JLabel();
+        jTextFieldIdProduto = new JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(869, 570));
@@ -31,65 +29,69 @@ public class ExcluirProdutoWindow extends JFrame {
         jLabelExcluirProduto.setFont(new java.awt.Font("Segoe UI", 1, 36));
         jLabelExcluirProduto.setText("Excluir Produto");
 
-        jTableEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Descrição", "Preço", "Quantidade no Estoque"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
-            };
+        JButtonExcluirProduto.setBackground(new java.awt.Color(153, 255, 51));
+        JButtonExcluirProduto.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        JButtonExcluirProduto.setForeground(new java.awt.Color(51, 51, 51));
+        JButtonExcluirProduto.setText("Excluir Produto");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        JButtonVoltar.setBackground(new java.awt.Color(204, 204, 255));
+        JButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        JButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
+        JButtonVoltar.setText("Voltar");
+        JButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonVoltarActionPerformed(evt);
             }
         });
-        jScrollPaneEstoque = new JScrollPane(jTableEstoque);
 
-        jButtonExcluirProduto.setBackground(new java.awt.Color(153, 255, 51));
-        jButtonExcluirProduto.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        jButtonExcluirProduto.setForeground(new java.awt.Color(51, 51, 51));
-        jButtonExcluirProduto.setText("Excluir Produto");
-        jButtonExcluirProduto.setName("");
+        jLabelIdProduto.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jLabelIdProduto.setText("ID do produto Editado:");
+
+        jTextFieldIdProduto.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jScrollPaneEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelExcluirProduto)
+                .addGap(202, 202, 202))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JButtonVoltar)
+                    .addComponent(jLabelIdProduto))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelExcluirProduto)
-                        .addGap(234, 234, 234))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonExcluirProduto)
-                        .addGap(20, 20, 20))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(JButtonExcluirProduto)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addComponent(jLabelExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jButtonExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPaneEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(125, 125, 125)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelIdProduto)
+                    .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JButtonExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JButtonVoltar))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         pack();
+    }
+
+    private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
     public static void main(String args[]) {
@@ -116,4 +118,10 @@ public class ExcluirProdutoWindow extends JFrame {
             }
         });
     }
+
+    private javax.swing.JButton JButtonExcluirProduto;
+    private javax.swing.JButton JButtonVoltar;
+    private javax.swing.JLabel jLabelExcluirProduto;
+    private javax.swing.JLabel jLabelIdProduto;
+    private javax.swing.JTextField jTextFieldIdProduto;
 }

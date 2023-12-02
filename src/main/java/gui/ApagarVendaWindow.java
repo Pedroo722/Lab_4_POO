@@ -1,93 +1,95 @@
 package gui; 
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.JTextField;
 
-public class ApagarVendaWindow extends JFrame {
+public class ApagarVendaWindow extends javax.swing.JFrame {
 
-    private JLabel jLabelApagarVenda;
-    private JScrollPane jScrollPaneVenda;
-    private JTable jTableVenda;
-    private JButton jButtonApagarVenda;
-
+    /**
+     * Creates new form ApagarVendaWindow
+     */
     public ApagarVendaWindow() {
         initComponents();
     }
 
     private void initComponents() {
         jLabelApagarVenda = new JLabel();
-        jScrollPaneVenda = new JScrollPane();
-        jTableVenda = new JTable();
-        jButtonApagarVenda = new JButton();
+        JButtonApagarVenda = new JButton();
+        jLabelNumeroVenda = new JLabel();
+        jTextFieldNumeroVenda = new JTextField();
+        JButtonVoltar = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(869, 570));
         setMinimumSize(new java.awt.Dimension(869, 570));
+        setName(""); 
+        setPreferredSize(new java.awt.Dimension(869, 570));
         setResizable(false);
 
         jLabelApagarVenda.setFont(new java.awt.Font("Segoe UI", 1, 36));
         jLabelApagarVenda.setText("Apagar Venda");
 
-        jTableVenda.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        jTableVenda.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Produto", "Unidades Vendidas"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
-            };
+        JButtonApagarVenda.setBackground(new java.awt.Color(153, 255, 51));
+        JButtonApagarVenda.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        JButtonApagarVenda.setForeground(new java.awt.Color(51, 51, 51));
+        JButtonApagarVenda.setText("Apagar Venda");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        jLabelNumeroVenda.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jLabelNumeroVenda.setText("Número da Venda:");
+
+        jTextFieldNumeroVenda.setBackground(new java.awt.Color(255, 255, 255));
+
+        JButtonVoltar.setBackground(new java.awt.Color(204, 204, 255));
+        JButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        JButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
+        JButtonVoltar.setText("Voltar");
+        JButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonVoltarActionPerformed(evt);
             }
         });
-        jScrollPaneVenda.setViewportView(jTableVenda);
-
-        jButtonApagarVenda.setBackground(new java.awt.Color(153, 255, 51));
-        jButtonApagarVenda.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        jButtonApagarVenda.setForeground(new java.awt.Color(51, 51, 51));
-        jButtonApagarVenda.setText("Apagar Venda");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelApagarVenda)
-                        .addGap(247, 247, 247))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonApagarVenda)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPaneVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelApagarVenda)
+                .addGap(205, 205, 205))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JButtonVoltar)
+                    .addComponent(jLabelNumeroVenda))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldNumeroVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JButtonApagarVenda))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(19, 19, 19)
                 .addComponent(jLabelApagarVenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jButtonApagarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPaneVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addGap(130, 130, 130)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNumeroVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNumeroVenda, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JButtonVoltar)
+                    .addComponent(JButtonApagarVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         pack();
+    }
+
+    private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
     public static void main(String args[]) {
@@ -114,4 +116,10 @@ public class ApagarVendaWindow extends JFrame {
             }
         });
     }
+
+    private javax.swing.JButton JButtonApagarVenda;
+    private javax.swing.JButton JButtonVoltar;
+    private javax.swing.JLabel jLabelApagarVenda;
+    private javax.swing.JLabel jLabelNumeroVenda;
+    private javax.swing.JTextField jTextFieldNumeroVenda;
 }
