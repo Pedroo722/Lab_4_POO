@@ -37,11 +37,21 @@ public class VendaWindow extends javax.swing.JFrame {
         JButtonCadastraVenda.setFont(new java.awt.Font("Segoe UI", 0, 24));
         JButtonCadastraVenda.setForeground(new java.awt.Color(51, 51, 51));
         JButtonCadastraVenda.setText("Cadastrar Venda");
+        JButtonCadastraVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonCadastraVendaActionPerformed(evt);
+            }
+        });
 
         JButtonExcluirVenda.setBackground(new java.awt.Color(51, 153, 255));
         JButtonExcluirVenda.setFont(new java.awt.Font("Segoe UI", 0, 24));
         JButtonExcluirVenda.setForeground(new java.awt.Color(51, 51, 51));
         JButtonExcluirVenda.setText("Excluir Venda");
+        JButtonExcluirVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonExcluirVendaActionPerformed(evt);
+            }
+        });
 
         JButtonVoltar.setBackground(new java.awt.Color(204, 204, 255));
         JButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
@@ -94,6 +104,15 @@ public class VendaWindow extends javax.swing.JFrame {
         );
 
         pack();
+    }
+
+    private void JButtonCadastraVendaActionPerformed(java.awt.event.ActionEvent evt) {
+        screenManager.showCadastroVendaWindow();
+    }
+
+
+    private void JButtonExcluirVendaActionPerformed(java.awt.event.ActionEvent evt) {
+        screenManager.showApagarVendaWindow();
     }
 
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {

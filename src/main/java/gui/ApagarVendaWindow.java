@@ -9,7 +9,10 @@ public class ApagarVendaWindow extends javax.swing.JFrame {
     /**
      * Creates new form ApagarVendaWindow
      */
-    public ApagarVendaWindow() {
+    private ScreenManager screenManager;
+
+    public ApagarVendaWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
     }
 
@@ -89,7 +92,7 @@ public class ApagarVendaWindow extends javax.swing.JFrame {
     }
 
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        screenManager.showVendaWindow();
     }
 
     public static void main(String args[]) {
@@ -110,9 +113,11 @@ public class ApagarVendaWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ApagarVendaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        ScreenManager screenManager = new ScreenManager();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ApagarVendaWindow().setVisible(true);
+                new ApagarVendaWindow(screenManager).setVisible(true);
             }
         });
     }

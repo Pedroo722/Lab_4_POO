@@ -156,9 +156,7 @@ public class EstoqueWindow extends JFrame {
     }
 
     private void jButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        ExcluirProdutoWindow excluirWindow = new ExcluirProdutoWindow();
-        excluirWindow.setVisible(true);
-        this.setVisible(false);
+        screenManager.showExcluirProdutoWindow();
     }
 
     private void jButtonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,8 +166,6 @@ public class EstoqueWindow extends JFrame {
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
         screenManager.showMainWindow();
     }
-
-
 
     private void setTableModel() {
         // Dados de exemplo para preencher a tabela

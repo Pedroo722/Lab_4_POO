@@ -10,6 +10,9 @@ public class ScreenManager {
     private VendaWindow vendaWindow;
     private AdicionarProdutoWindow cadastroProdutoWindow;
     private EditarProdutoWindow editarProdutoWindow;
+    private ExcluirProdutoWindow excluirProdutoWindow;
+    private VendaCadastroWindow cadastroVendaWindow;
+    private ApagarVendaWindow apagarVendaWindow;
 
     public ScreenManager() {
         mainWindow = new MainWindow(this);
@@ -17,6 +20,9 @@ public class ScreenManager {
         vendaWindow = new VendaWindow(this);
         cadastroProdutoWindow = new AdicionarProdutoWindow(this);
         editarProdutoWindow = new EditarProdutoWindow(this);
+        excluirProdutoWindow = new ExcluirProdutoWindow(this);
+        cadastroVendaWindow = new VendaCadastroWindow(this);
+        apagarVendaWindow = new ApagarVendaWindow(this);
     }
 
     public void showMainWindow() {
@@ -33,6 +39,7 @@ public class ScreenManager {
         vendaWindow.setVisible(false);
         cadastroProdutoWindow.setVisible(false);
         editarProdutoWindow.setVisible(false);
+        excluirProdutoWindow.setVisible(false);
     }
 
     public void showAdicionarProdutoWindow() {
@@ -40,6 +47,7 @@ public class ScreenManager {
         mainWindow.setVisible(false);
         estoqueWindow.setVisible(false);
         editarProdutoWindow.setVisible(false);
+        excluirProdutoWindow.setVisible(false);
     }
 
     public void showEditarProdutoWindow() {
@@ -47,6 +55,15 @@ public class ScreenManager {
         mainWindow.setVisible(false);
         estoqueWindow.setVisible(false);
         cadastroProdutoWindow.setVisible(false);
+        excluirProdutoWindow.setVisible(false);
+    }
+
+    public void showExcluirProdutoWindow() {
+        excluirProdutoWindow.setVisible(true);
+        mainWindow.setVisible(false);
+        estoqueWindow.setVisible(false);
+        cadastroProdutoWindow.setVisible(false);
+        editarProdutoWindow.setVisible(false);
     }
 
     // Telas de Venda
@@ -55,5 +72,23 @@ public class ScreenManager {
         vendaWindow.setVisible(true);
         mainWindow.setVisible(false);
         estoqueWindow.setVisible(false);
+        cadastroVendaWindow.setVisible(false);
+        apagarVendaWindow.setVisible(false);
+    }
+
+    public void showCadastroVendaWindow() {
+        cadastroVendaWindow.setVisible(true);
+        vendaWindow.setVisible(false);
+        mainWindow.setVisible(false);
+        estoqueWindow.setVisible(false);
+        apagarVendaWindow.setVisible(false);
+    }
+
+    public void showApagarVendaWindow() {
+        apagarVendaWindow.setVisible(true);
+        vendaWindow.setVisible(false);
+        mainWindow.setVisible(false);
+        estoqueWindow.setVisible(false);
+        cadastroVendaWindow.setVisible(false);
     }
 }

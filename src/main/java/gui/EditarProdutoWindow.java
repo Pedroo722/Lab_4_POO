@@ -9,7 +9,10 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
     /**
      * Creates new form EditarProdutoWindow
      */
-    public EditarProdutoWindow() {
+    private ScreenManager screenManager;
+
+    public EditarProdutoWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
     }
 
@@ -42,6 +45,12 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
         jButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
         jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonVoltarActionPerformed(evt);
+            }
+        });
+
 
         jTextFieldNovaQuantidade.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -66,7 +75,7 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
         });
 
         jLabelIdProduto.setFont(new java.awt.Font("Segoe UI", 0, 24));
-        jLabelIdProduto.setText("ID do produto Editado:");
+        jLabelIdProduto.setText("ID do produto editado:");
 
         jTextFieldIdProduto.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -133,7 +142,11 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
 
     private void jTextFieldNovoPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNovoPrecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNovoPrecoActionPerformed
+    }
+
+    private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNovoPrecoActionPerformed
+        screenManager.showEstoqueWindow();
+    }
 
     /**
      * @param args the command line arguments
@@ -156,9 +169,11 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EditarProdutoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        ScreenManager screenManager = new ScreenManager();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarProdutoWindow().setVisible(true);
+                new EditarProdutoWindow(screenManager).setVisible(true);
             }
         });
     }

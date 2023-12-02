@@ -9,9 +9,13 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
     /**
      * Creates new form ExcluirProdutoWindow
      */
-    public ExcluirProdutoWindow() {
+    private ScreenManager screenManager;
+
+    public ExcluirProdutoWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
     }
+
 
     private void initComponents() {
         jLabelExcluirProduto = new JLabel();
@@ -45,7 +49,7 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
         });
 
         jLabelIdProduto.setFont(new java.awt.Font("Segoe UI", 0, 24));
-        jLabelIdProduto.setText("ID do produto Editado:");
+        jLabelIdProduto.setText("ID do produto:");
 
         jTextFieldIdProduto.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -91,7 +95,7 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
     }
 
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        screenManager.showEstoqueWindow();
     }
 
     public static void main(String args[]) {
@@ -112,9 +116,11 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ExcluirProdutoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        ScreenManager screenManager = new ScreenManager();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExcluirProdutoWindow().setVisible(true);
+                new ExcluirProdutoWindow(screenManager).setVisible(true);
             }
         });
     }

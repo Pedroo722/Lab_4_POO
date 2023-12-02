@@ -20,9 +20,12 @@ public class VendaCadastroWindow extends JFrame {
     private JScrollPane jScrollPaneVenda;
     private JTable jTableVenda;
     private JButton jButtonApagarVenda;
+    private ScreenManager screenManager;
 
-    public VendaCadastroWindow() {
+    public VendaCadastroWindow(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         initComponents();
+        setTableModel();
     }
 
     private void initComponents() {
@@ -47,6 +50,11 @@ public class VendaCadastroWindow extends JFrame {
         jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.setName("");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jButtonCadastrarVenda.setBackground(new java.awt.Color(102, 255, 51));
         jButtonCadastrarVenda.setFont(new java.awt.Font("Segoe UI", 0, 24));
@@ -195,6 +203,32 @@ public class VendaCadastroWindow extends JFrame {
         pack();
     }
 
+    private void setTableModel() {
+        // Dados de exemplo para preencher a tabela
+        Object[][] data = {
+            {,},
+            {,},
+            {,},
+            {,},
+        };
+    
+        String[] columnNames = {"Produto", "Quantidade"};
+    
+        // Configure o modelo da tabela com os dados
+        jTableVenda.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
+            Class[] types = new Class[]{
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+            };
+    
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        });
+
+        jTableVenda.setFillsViewportHeight(true);
+
+    }
+
     private void jButtonCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -215,6 +249,10 @@ public class VendaCadastroWindow extends JFrame {
         // TODO add your handling code here:
     }
 
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+        screenManager.showVendaWindow();
+    }
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -233,9 +271,11 @@ public class VendaCadastroWindow extends JFrame {
             java.util.logging.Logger.getLogger(VendaCadastroWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        ScreenManager screenManager = new ScreenManager();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VendaCadastroWindow().setVisible(true);
+                new VendaCadastroWindow(screenManager).setVisible(true);
             }
         });
     }
