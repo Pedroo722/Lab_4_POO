@@ -16,7 +16,7 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
     private JTextField jTextFieldNome;
     private JTextField jTextFieldValor;
     private JTextField jTextFieldQuantidade;
-
+    
     public AdicionarProdutoWindow() {
         initComponents();
     }
@@ -54,6 +54,11 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
         jButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
         jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jButtonCadastrar.setBackground(new java.awt.Color(102, 255, 102));
         jButtonCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 24));
@@ -126,6 +131,13 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+        EstoqueWindow estoqueWindow = new EstoqueWindow();
+        estoqueWindow.setVisible(true);
+        this.setVisible(false);
+    }
+
 
     public static void main(String args[]) {
         try {

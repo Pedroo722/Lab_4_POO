@@ -30,6 +30,11 @@ public class MainWindow extends JFrame {
         jButtonEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jButtonEstoque.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEstoque.setText("Estoque");
+        jButtonEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEstoqueActionPerformed(evt);
+            }
+        });
 
         jButtonVendas.setBackground(new java.awt.Color(153, 153, 255));
         jButtonVendas.setFont(new java.awt.Font("Segoe UI", 0, 18));
@@ -75,7 +80,15 @@ public class MainWindow extends JFrame {
     }
 
     private void jButtonVendasActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        VendaWindow vendaWindow = new VendaWindow();
+        vendaWindow.setVisible(true);
+        this.setVisible(false);
+    }
+
+    private void jButtonEstoqueActionPerformed(java.awt.event.ActionEvent evt) {
+        EstoqueWindow estoqueWindow = new EstoqueWindow();
+        estoqueWindow.setVisible(true);
+        this.setVisible(false);
     }
 
     public static void main(String args[]) {
@@ -92,7 +105,7 @@ public class MainWindow extends JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.   UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -101,5 +114,7 @@ public class MainWindow extends JFrame {
                 new MainWindow().setVisible(true);
             }
         });
+
     }
 }
+

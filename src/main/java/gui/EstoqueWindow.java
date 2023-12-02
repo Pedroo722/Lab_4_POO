@@ -15,6 +15,7 @@ public class EstoqueWindow extends JFrame {
     private JButton jButtonEditarProduto;
     private JScrollPane jScrollPaneEstoque;
     private JTable jTableEstoque;
+    
 
     public EstoqueWindow() {
         initComponents();
@@ -66,6 +67,7 @@ public class EstoqueWindow extends JFrame {
                 jButtonVoltarActionPerformed(evt);
             }
         });
+        
 
         jButtonEditarProduto.setBackground(new java.awt.Color(51, 153, 255));
         jButtonEditarProduto.setFont(new java.awt.Font("Segoe UI", 0, 24));
@@ -148,19 +150,27 @@ public class EstoqueWindow extends JFrame {
     }
 
     private void jButtonAdicionaProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        EstoqueCadastroWindow cadastroProdutoWindow = new EstoqueCadastroWindow();
+        cadastroProdutoWindow.setVisible(true);
+        this.setVisible(false);
     }
 
     private void jButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        ExcluirProdutoWindow excluirWindow = new ExcluirProdutoWindow();
+        excluirWindow.setVisible(true);
+        this.setVisible(false);
     }
 
     private void jButtonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        EditarProdutoWindow editarWindow = new EditarProdutoWindow();
+        editarWindow.setVisible(true);
+        this.setVisible(false);
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.setVisible(true);
+        this.setVisible(false);
     }
 
     public static void main(String args[]) {
