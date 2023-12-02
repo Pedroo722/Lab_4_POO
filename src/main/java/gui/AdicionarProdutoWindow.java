@@ -1,5 +1,9 @@
 package gui; 
 
+import java.util.Random;
+
+import gerenciador.Controller;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -16,9 +20,11 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
     private JTextField jTextFieldValor;
     private JTextField jTextFieldQuantidade;
     private ScreenManager screenManager;
+    private Controller controller;
 
     public AdicionarProdutoWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
+        this.controller = Controller.getInstance();
         initComponents();
     }
 
@@ -130,7 +136,21 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
     }
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        Random rand = new Random(); 
+        int upperbound = 1000; // ID entre 1 e 999
+        int ID = rand.nextInt(upperbound);
+
+        String nome = jTextFieldNome.getText();
+        double valor = Double.parseDouble(jTextFieldValor.getText());
+        int quantidade = Integer.parseInt(jTextFieldQuantidade.getText());
+
+        // Chame o método correspondente do Controller para cadastrar o novo produto
+        controller.cadastrarProduto(ID, nome, valor, quantidade);
+
+        // Limpe os campos após cadastrar o produto (opcional)
+        jTextFieldNome.setText("");
+        jTextFieldValor.setText("");
+        jTextFieldQuantidade.setText("");
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {

@@ -23,6 +23,7 @@ import model.Inventario;
 // Classe Principalf
 
 public class Controller {
+  private static Controller instance;
   private Inventario inventario;
   private ItemVenda itemVenda;
   private Venda vendas;
@@ -31,6 +32,13 @@ public class Controller {
     inventario = new Inventario();
     itemVenda = new ItemVenda();
     vendas = new Venda();
+  }
+
+  public static Controller getInstance() {
+    if (instance == null) {
+      instance = new Controller();
+    }
+    return instance;
   }
 
   // Caso 1. Cadastrar produto no Estoque

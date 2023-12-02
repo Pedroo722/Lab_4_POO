@@ -1,5 +1,9 @@
 package gui;
 
+import gerenciador.Controller;
+
+import exceptions.ProdutoNaoEncontradoException;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -10,9 +14,11 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
      * Creates new form ExcluirProdutoWindow
      */
     private ScreenManager screenManager;
+    private Controller controller;
 
     public ExcluirProdutoWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
+        this.controller = Controller.getInstance();
         initComponents();
     }
 
@@ -37,6 +43,11 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
         JButtonExcluirProduto.setFont(new java.awt.Font("Segoe UI", 0, 18));
         JButtonExcluirProduto.setForeground(new java.awt.Color(51, 51, 51));
         JButtonExcluirProduto.setText("Excluir Produto");
+        JButtonExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonExcluirProdutoActionPerformed(evt);
+            }
+        });
 
         JButtonVoltar.setBackground(new java.awt.Color(204, 204, 255));
         JButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));
@@ -92,6 +103,20 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
         );
 
         pack();
+    }
+
+    private void JButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String IDString = jTextFieldIdProduto.getText();
+            int ID = Integer.parseInt(IDString);
+
+            controller.removerProduto(ID);
+
+            jTextFieldIdProduto.setText("");
+
+        } catch (ProdutoNaoEncontradoException ex) {
+            //
+        }
     }
 
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {

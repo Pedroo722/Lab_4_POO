@@ -1,5 +1,9 @@
 package gui;
 
+import gerenciador.Controller;
+
+import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -10,9 +14,12 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
      * Creates new form EditarProdutoWindow
      */
     private ScreenManager screenManager;
+    private Controller controller;
+
 
     public EditarProdutoWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
+        this.controller = Controller.getInstance();
         initComponents();
     }
 
@@ -58,6 +65,12 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
         jButtonEditar.setFont(new java.awt.Font("Segoe UI", 0, 24));
         jButtonEditar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
+        
 
         jLabelNovoPreco.setFont(new java.awt.Font("Segoe UI", 0, 24));
         jLabelNovoPreco.setText("Novo Preço:");
@@ -68,11 +81,7 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
         jLabelNovaQuantidade.setText("Nova Quantidade:");
 
         jTextFieldNovoPreco.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldNovoPreco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNovoPrecoActionPerformed(evt);
-            }
-        });
+
 
         jLabelIdProduto.setFont(new java.awt.Font("Segoe UI", 0, 24));
         jLabelIdProduto.setText("ID do produto editado:");
@@ -140,8 +149,21 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNovoPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNovoPrecoActionPerformed
-        // TODO add your handling code here:
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNovoPrecoActionPerformed
+        String IDString = jTextFieldIdProduto.getText();
+        int ID = Integer.parseInt(IDString);
+
+        String nome = jTextFieldNovoNome.getText();
+        double valor = Double.parseDouble(jTextFieldNovoPreco.getText());
+        int quantidade = Integer.parseInt(jTextFieldNovaQuantidade.getText());
+
+        // Chame o método correspondente do Controller para cadastrar o novo produto
+        controller.editarProduto(ID, nome, valor, quantidade);
+
+        // Limpe os campos após cadastrar o produto (opcional)
+        jTextFieldNovoNome.setText("");
+        jTextFieldNovoPreco.setText("");
+        jTextFieldNovaQuantidade.setText("");
     }
 
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNovoPrecoActionPerformed
