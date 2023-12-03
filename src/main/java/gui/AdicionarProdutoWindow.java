@@ -155,17 +155,11 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
             boolean isPrecoValid = new DoubleValidator().validate(valor);
             boolean isQuantidadeValid = new IntValidator().validate(quantidade);
 
-            // Chame o método correspondente do Controller para cadastrar o novo produto
-            if (isNomeValid && isPrecoValid && isQuantidadeValid) {
-                controller.cadastrarProduto(ID, nome, valor, quantidade);
+            controller.cadastrarProduto(ID, nome, valor, quantidade);
 
-                // Limpe os campos após cadastrar o produto (opcional)
-                jTextFieldNome.setText("");
-                jTextFieldValor.setText("");
-                jTextFieldQuantidade.setText("");
-            } else {
-                throw new NumberFormatException();
-            }
+            jTextFieldNome.setText("");
+            jTextFieldValor.setText("");
+            jTextFieldQuantidade.setText("");
         } catch (IDInvalidoException ex) {
             JOptionPane.showMessageDialog(this, "Operação falha. Esse ID já está cadastrado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         } catch (NumberFormatException ex) {

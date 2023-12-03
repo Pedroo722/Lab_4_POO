@@ -1,13 +1,22 @@
 package gui;
 
 import gerenciador.Controller;
+import validators.IntValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import exceptions.InventarioInsuficienteException;
+import exceptions.ProdutoNaoEncontradoException;
 
 public class VendaCadastroWindow extends JFrame {
 
@@ -21,9 +30,11 @@ public class VendaCadastroWindow extends JFrame {
     private JButton jButtonAdicionarItem;
     private JScrollPane jScrollPaneVenda;
     private JTable jTableVenda;
-    private JButton jButtonApagarVenda;
+    private JButton jButtonRemoverItem;
     private ScreenManager screenManager;
     private Controller controller;
+    private List<Integer> identificadoresProdutos = new ArrayList<>();
+    private List<Integer> quantidadesVendidas = new ArrayList<>();
 
     public VendaCadastroWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
@@ -43,7 +54,7 @@ public class VendaCadastroWindow extends JFrame {
         jButtonAdicionarItem = new JButton();
         jScrollPaneVenda = new JScrollPane();
         jTableVenda = new JTable();
-        jButtonApagarVenda = new JButton();
+        jButtonRemoverItem = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -81,18 +92,8 @@ public class VendaCadastroWindow extends JFrame {
         jLabelIdProduto.setName("");
 
         jTextFieldIdProduto.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldIdProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIdProdutoActionPerformed(evt);
-            }
-        });
 
         jTextFieldQuantidadeVendida.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldQuantidadeVendida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldQuantidadeVendidaActionPerformed(evt);
-            }
-        });
 
         jLabelQuantidadeVendida.setBackground(new java.awt.Color(51, 204, 255));
         jLabelQuantidadeVendida.setFont(new java.awt.Font("Segoe UI", 0, 24));
@@ -134,14 +135,14 @@ public class VendaCadastroWindow extends JFrame {
         });
         jScrollPaneVenda.setViewportView(jTableVenda);
 
-        jButtonApagarVenda.setBackground(new java.awt.Color(51, 153, 255));
-        jButtonApagarVenda.setFont(new java.awt.Font("Segoe UI", 0, 24));
-        jButtonApagarVenda.setForeground(new java.awt.Color(51, 51, 51));
-        jButtonApagarVenda.setText("Apagar Venda");
-        jButtonApagarVenda.setName("");
-        jButtonApagarVenda.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRemoverItem.setBackground(new java.awt.Color(51, 153, 255));
+        jButtonRemoverItem.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jButtonRemoverItem.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonRemoverItem.setText("Remover Item");
+        jButtonRemoverItem.setName("");
+        jButtonRemoverItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonApagarVendaActionPerformed(evt);
+                jButtonRemoverItemActionPerformed(evt);
             }
         });
 
@@ -165,7 +166,7 @@ public class VendaCadastroWindow extends JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonVoltar)
                         .addGap(138, 138, 138)
-                        .addComponent(jButtonApagarVenda)
+                        .addComponent(jButtonRemoverItem)
                         .addGap(93, 93, 93)
                         .addComponent(jButtonCadastrarVenda)))
                 .addGap(52, 52, 52))
@@ -199,7 +200,7 @@ public class VendaCadastroWindow extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVoltar)
-                    .addComponent(jButtonApagarVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRemoverItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonCadastrarVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -210,22 +211,6 @@ public class VendaCadastroWindow extends JFrame {
     private void setTableModel() {
         // Dados de exemplo para preencher a tabela
         Object[][] data = {
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
-            {,},
         };
     
         String[] columnNames = {"Produto", "Quantidade"};
@@ -246,25 +231,61 @@ public class VendaCadastroWindow extends JFrame {
     }
 
     private void jButtonAdicionarItemActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        try {
+            int idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
+            int quantidadeVendida = Integer.parseInt(jTextFieldQuantidadeVendida.getText());
+
+            boolean isIdValid = new IntValidator().validate(idProduto);
+            boolean isQuantidadeValid = new IntValidator().validate(quantidadeVendida);
+
+            if (isIdValid && isQuantidadeValid) {
+                identificadoresProdutos.add(idProduto);
+                quantidadesVendidas.add(quantidadeVendida);
+
+                DefaultTableModel model = (DefaultTableModel) jTableVenda.getModel();
+                model.addRow(new Object[]{idProduto, quantidadeVendida});
+            } else {
+                throw new NumberFormatException();
+            }
+            jTextFieldIdProduto.setText("");
+            jTextFieldQuantidadeVendida.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Insira números válidos para o ID e a quantidade vendida.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
+
 
     private void jButtonCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        try {
+            // Chame o método adicionarItemVenda do controlador
+            controller.adicionarItemVenda(identificadoresProdutos, quantidadesVendidas);
+
+            // Limpe as listas e a tabela
+            identificadoresProdutos.clear();
+            quantidadesVendidas.clear();
+            DefaultTableModel model = (DefaultTableModel) jTableVenda.getModel();
+            model.setRowCount(0);
+        } catch (InventarioInsuficienteException e) {
+            JOptionPane.showMessageDialog(this, "Operação falha. A quantidade vendida excede o estoque atual.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (ProdutoNaoEncontradoException e) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Produto não encontrado, o foi possível cadastrar a venda.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
-    private void jTextFieldIdProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void jButtonRemoverItemActionPerformed(java.awt.event.ActionEvent evt) {
+        int selectedRow = jTableVenda.getSelectedRow();
+    
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) jTableVenda.getModel();
+            model.removeRow(selectedRow);
+    
+            identificadoresProdutos.remove(selectedRow);
+            quantidadesVendidas.remove(selectedRow);
+        } else {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um item na tabela para apagar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
-
-    private void jTextFieldQuantidadeVendidaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButtonApagarVendaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
+    
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
         screenManager.showVendaWindow();
     }

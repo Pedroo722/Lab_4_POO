@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import exceptions.EstoqueVazioException;
 import exceptions.IDInvalidoException;
@@ -229,7 +230,7 @@ public class EstoqueWindow extends JFrame {
 
             jTableEstoque.setFillsViewportHeight(true);
         }  catch (EstoqueVazioException e) {
-            //
+            
         }
     }
 

@@ -172,6 +172,7 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
             if (isNomeValid && isPrecoValid && isQuantidadeValid) {
                 controller.editarProduto(ID, nome, valor, quantidade);
 
+                jTextFieldIdProduto.setText("");
                 jTextFieldNovoNome.setText("");
                 jTextFieldNovoPreco.setText("");
                 jTextFieldNovaQuantidade.setText("");
