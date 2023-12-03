@@ -1,4 +1,6 @@
-package gui; 
+package gui;
+
+import gerenciador.Controller;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,14 +18,16 @@ public class VendaCadastroWindow extends JFrame {
     private JTextField jTextFieldIdProduto;
     private JTextField jTextFieldQuantidadeVendida;
     private JLabel jLabelQuantidadeVendida;
-    private JButton jButtonAdicionarVenda;
+    private JButton jButtonAdicionarItem;
     private JScrollPane jScrollPaneVenda;
     private JTable jTableVenda;
     private JButton jButtonApagarVenda;
     private ScreenManager screenManager;
+    private Controller controller;
 
     public VendaCadastroWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
+        this.controller = Controller.getInstance();
         initComponents();
         setTableModel();
     }
@@ -36,7 +40,7 @@ public class VendaCadastroWindow extends JFrame {
         jTextFieldIdProduto = new JTextField();
         jTextFieldQuantidadeVendida = new JTextField();
         jLabelQuantidadeVendida = new JLabel();
-        jButtonAdicionarVenda = new JButton();
+        jButtonAdicionarItem = new JButton();
         jScrollPaneVenda = new JScrollPane();
         jTableVenda = new JTable();
         jButtonApagarVenda = new JButton();
@@ -94,17 +98,17 @@ public class VendaCadastroWindow extends JFrame {
         jLabelQuantidadeVendida.setFont(new java.awt.Font("Segoe UI", 0, 24));
         jLabelQuantidadeVendida.setForeground(new java.awt.Color(0, 153, 255));
         jLabelQuantidadeVendida.setText("Quantidade Vendida:");
-        jLabelQuantidadeVendida.setName("");
+        jLabelQuantidadeVendida.setName("");        
 
-        jButtonAdicionarVenda.setBackground(new java.awt.Color(102, 255, 51));
-        jButtonAdicionarVenda.setFont(new java.awt.Font("Segoe UI", 0, 24));
-        jButtonAdicionarVenda.setForeground(new java.awt.Color(51, 51, 51));
-        jButtonAdicionarVenda.setText("Adicionar Venda");
-        jButtonAdicionarVenda.setActionCommand("Adicionar Venda");
-        jButtonAdicionarVenda.setName("");
-        jButtonAdicionarVenda.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdicionarItem.setBackground(new java.awt.Color(102, 255, 51));
+        jButtonAdicionarItem.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jButtonAdicionarItem.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonAdicionarItem.setText("Adicionar Produto");
+        jButtonAdicionarItem.setActionCommand("Adicionar Produto");
+        jButtonAdicionarItem.setName("");
+        jButtonAdicionarItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAdicionarVendaActionPerformed(evt);
+                jButtonAdicionarItemActionPerformed(evt);
             }
         });
 
@@ -157,7 +161,7 @@ public class VendaCadastroWindow extends JFrame {
                             .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldQuantidadeVendida, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(51, 51, 51)
-                        .addComponent(jButtonAdicionarVenda))
+                        .addComponent(jButtonAdicionarItem))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonVoltar)
                         .addGap(138, 138, 138)
@@ -189,7 +193,7 @@ public class VendaCadastroWindow extends JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextFieldQuantidadeVendida, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelQuantidadeVendida))
-                    .addComponent(jButtonAdicionarVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonAdicionarItem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPaneVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,6 +210,18 @@ public class VendaCadastroWindow extends JFrame {
     private void setTableModel() {
         // Dados de exemplo para preencher a tabela
         Object[][] data = {
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
+            {,},
             {,},
             {,},
             {,},
@@ -229,6 +245,10 @@ public class VendaCadastroWindow extends JFrame {
 
     }
 
+    private void jButtonAdicionarItemActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
     private void jButtonCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -238,10 +258,6 @@ public class VendaCadastroWindow extends JFrame {
     }
 
     private void jTextFieldQuantidadeVendidaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButtonAdicionarVendaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 

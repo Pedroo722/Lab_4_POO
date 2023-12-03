@@ -1,9 +1,20 @@
 package gui;
 
+import gerenciador.Controller;
+import model.ItemVenda;
+import model.Produto;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import exceptions.EstoqueVazioException;
+import exceptions.VendasVazioException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.GroupLayout;
 
 public class VendaWindow extends javax.swing.JFrame {
@@ -12,10 +23,19 @@ public class VendaWindow extends javax.swing.JFrame {
      * Creates new form VendaWindow
      */
     private ScreenManager screenManager;
+    private Controller controller;
 
     public VendaWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
+        this.controller = Controller.getInstance();
         initComponents();
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                setTextArea();
+            }
+        });
     }
 
     private void initComponents() {
@@ -118,6 +138,37 @@ public class VendaWindow extends javax.swing.JFrame {
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
         screenManager.showMainWindow();
     }
+
+    private void setTextArea() {
+        try {
+            List<ItemVenda> vendas;
+            vendas = controller.relatorioVendas();
+    
+            StringBuilder textContent = new StringBuilder();
+    
+            for (int i = 0; i < vendas.size(); i++) {
+                ItemVenda venda = vendas.get(i);
+                textContent.append("Venda #").append(i + 1).append("\n");
+    
+                List<Produto> produtosVenda = venda.getProdutos();
+                for (Produto produto : produtosVenda) {
+                    textContent.append("* Nome do Produto: ").append(produto.getNome()).append("\n");
+                    textContent.append("* Preço: ").append(produto.getPreco()).append("\n");
+                    textContent.append("* Quantidade Vendida: ").append(produto.getQuantidadeVendida()).append("\n\n");
+                }
+            }
+    
+            if (vendas.isEmpty()) {
+                textContent.append("Nenhuma venda cadastrada.");
+            }
+    
+            jTextAreaVenda.setText(textContent.toString());
+        } catch (VendasVazioException e) {
+            jTextAreaVenda.setText("Nenhuma venda cadastrada.");
+        }
+    }
+    
+
 
     public static void main(String args[]) {
         try {

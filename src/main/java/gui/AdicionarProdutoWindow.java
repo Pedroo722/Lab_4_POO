@@ -3,10 +3,16 @@ package gui;
 import java.util.Random;
 
 import gerenciador.Controller;
+import validators.DoubleValidator;
+import validators.IntValidator;
+import validators.StringValidator;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import exceptions.IDInvalidoException;
 
 public class AdicionarProdutoWindow extends javax.swing.JFrame {
 
@@ -136,21 +142,35 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
     }
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
-        Random rand = new Random(); 
-        int upperbound = 1000; // ID entre 1 e 999
-        int ID = rand.nextInt(upperbound);
+        try {
+            Random rand = new Random(); 
+            int upperbound = 1000; // ID entre 1 e 999
+            int ID = rand.nextInt(upperbound);
 
-        String nome = jTextFieldNome.getText();
-        double valor = Double.parseDouble(jTextFieldValor.getText());
-        int quantidade = Integer.parseInt(jTextFieldQuantidade.getText());
+            String nome = jTextFieldNome.getText();
+            double valor = Double.parseDouble(jTextFieldValor.getText());
+            int quantidade = Integer.parseInt(jTextFieldQuantidade.getText());
 
-        // Chame o método correspondente do Controller para cadastrar o novo produto
-        controller.cadastrarProduto(ID, nome, valor, quantidade);
+            boolean isNomeValid = new StringValidator().validate(nome);
+            boolean isPrecoValid = new DoubleValidator().validate(valor);
+            boolean isQuantidadeValid = new IntValidator().validate(quantidade);
 
-        // Limpe os campos após cadastrar o produto (opcional)
-        jTextFieldNome.setText("");
-        jTextFieldValor.setText("");
-        jTextFieldQuantidade.setText("");
+            // Chame o método correspondente do Controller para cadastrar o novo produto
+            if (isNomeValid && isPrecoValid && isQuantidadeValid) {
+                controller.cadastrarProduto(ID, nome, valor, quantidade);
+
+                // Limpe os campos após cadastrar o produto (opcional)
+                jTextFieldNome.setText("");
+                jTextFieldValor.setText("");
+                jTextFieldQuantidade.setText("");
+            } else {
+                throw new NumberFormatException();
+            }
+        } catch (IDInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Esse ID já está cadastrado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. O valor e a quantidade devem ser números válidos.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {

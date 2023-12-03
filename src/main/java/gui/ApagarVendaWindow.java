@@ -1,8 +1,14 @@
 package gui; 
 
+import gerenciador.Controller;
+import validators.IntValidator;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import exceptions.NumeroVendaInvalidoException;
 
 public class ApagarVendaWindow extends javax.swing.JFrame {
 
@@ -10,9 +16,11 @@ public class ApagarVendaWindow extends javax.swing.JFrame {
      * Creates new form ApagarVendaWindow
      */
     private ScreenManager screenManager;
+    private Controller controller;
 
     public ApagarVendaWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
+        this.controller = Controller.getInstance();
         initComponents();
     }
 
@@ -37,6 +45,11 @@ public class ApagarVendaWindow extends javax.swing.JFrame {
         JButtonApagarVenda.setFont(new java.awt.Font("Segoe UI", 0, 18));
         JButtonApagarVenda.setForeground(new java.awt.Color(51, 51, 51));
         JButtonApagarVenda.setText("Apagar Venda");
+        JButtonApagarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonApagarVendaActionPerformed(evt);
+            }
+        });
 
         jLabelNumeroVenda.setFont(new java.awt.Font("Segoe UI", 0, 24));
         jLabelNumeroVenda.setText("Número da Venda:");
@@ -89,6 +102,26 @@ public class ApagarVendaWindow extends javax.swing.JFrame {
         );
 
         pack();
+    }
+
+    private void JButtonApagarVendaActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String numeroVendaString = jTextFieldNumeroVenda.getText();
+            int numeroVenda = Integer.parseInt(numeroVendaString);
+
+            boolean isNumeroValid = new IntValidator().validate(numeroVenda);
+
+            if (isNumeroValid) {
+                controller.apagarVenda(numeroVenda);
+            } else {
+                throw new NumberFormatException();
+            }
+            jTextFieldNumeroVenda.setText("");
+        } catch (NumeroVendaInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Nenhuma venda com esse número encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Insira um número válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {

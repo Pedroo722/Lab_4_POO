@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class MainWindow extends javax.swing.JFrame {

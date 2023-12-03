@@ -2,10 +2,13 @@ package gui;
 
 import gerenciador.Controller;
 
+import validators.IntValidator;
+
 import exceptions.ProdutoNaoEncontradoException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class ExcluirProdutoWindow extends javax.swing.JFrame {
@@ -110,12 +113,20 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
             String IDString = jTextFieldIdProduto.getText();
             int ID = Integer.parseInt(IDString);
 
-            controller.removerProduto(ID);
+            boolean isNumeroValid = new IntValidator().validate(ID);
+
+            if (isNumeroValid) {
+                controller.removerProduto(ID);
+            } else {
+                throw new NumberFormatException();
+            }
 
             jTextFieldIdProduto.setText("");
 
         } catch (ProdutoNaoEncontradoException ex) {
-            //
+            JOptionPane.showMessageDialog(this, "Operação falha. Nenhum produto com esse ID encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Insira um número válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 

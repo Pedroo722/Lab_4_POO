@@ -1,11 +1,18 @@
 package gui;
 
 import gerenciador.Controller;
+import validators.DoubleValidator;
+import validators.IntValidator;
+import validators.StringValidator;
+import exceptions.ProdutoNaoEncontradoException;
+import exceptions.EstoqueVazioException;
+
 
 import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class EditarProdutoWindow extends javax.swing.JFrame {
@@ -150,20 +157,34 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNovoPrecoActionPerformed
-        String IDString = jTextFieldIdProduto.getText();
-        int ID = Integer.parseInt(IDString);
+        try {
+            String IDString = jTextFieldIdProduto.getText();
+            int ID = Integer.parseInt(IDString);
 
-        String nome = jTextFieldNovoNome.getText();
-        double valor = Double.parseDouble(jTextFieldNovoPreco.getText());
-        int quantidade = Integer.parseInt(jTextFieldNovaQuantidade.getText());
+            String nome = jTextFieldNovoNome.getText();
+            double valor = Double.parseDouble(jTextFieldNovoPreco.getText());
+            int quantidade = Integer.parseInt(jTextFieldNovaQuantidade.getText());
 
-        // Chame o método correspondente do Controller para cadastrar o novo produto
-        controller.editarProduto(ID, nome, valor, quantidade);
+            boolean isNomeValid = new StringValidator().validate(nome);
+            boolean isPrecoValid = new DoubleValidator().validate(valor);
+            boolean isQuantidadeValid = new IntValidator().validate(quantidade);
 
-        // Limpe os campos após cadastrar o produto (opcional)
-        jTextFieldNovoNome.setText("");
-        jTextFieldNovoPreco.setText("");
-        jTextFieldNovaQuantidade.setText("");
+            if (isNomeValid && isPrecoValid && isQuantidadeValid) {
+                controller.editarProduto(ID, nome, valor, quantidade);
+
+                jTextFieldNovoNome.setText("");
+                jTextFieldNovoPreco.setText("");
+                jTextFieldNovaQuantidade.setText("");
+            } else {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Formato de número invalido.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (ProdutoNaoEncontradoException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Nenhum produto com esse ID encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (EstoqueVazioException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. O estoque está vazio!", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void JButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNovoPrecoActionPerformed

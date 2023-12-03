@@ -102,6 +102,18 @@ public class EstoqueWindow extends JFrame {
         jTableEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {"O estoque", "está vazio.", null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -119,6 +131,7 @@ public class EstoqueWindow extends JFrame {
                 return types [columnIndex];
             }
         });
+        jTableEstoque.setFillsViewportHeight(true);
         jScrollPaneEstoque.setViewportView(jTableEstoque);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,7 +229,7 @@ public class EstoqueWindow extends JFrame {
 
             jTableEstoque.setFillsViewportHeight(true);
         }  catch (EstoqueVazioException e) {
-            // JOptionPane.showMessageDialog(this, "O estoque está vazio", "Aviso", JOptionPane.WARNING_MESSAGE);
+            //
         }
     }
 

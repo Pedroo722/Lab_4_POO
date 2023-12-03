@@ -24,7 +24,7 @@ public class Main {
     Scanner nomeScanner = new Scanner(System.in); // scanner para pegar a linha inteira
     boolean processamento = true; // flag para o loop
     List<Produto> produtosNoEstoque;
-    List<ItemVenda>vendas;
+    List<ItemVenda> vendas;
 
     System.out.println("Bem-vindo ao Ponto de Venda do Jeremias!");
     System.out.println("O que deseja fazer?\n");
