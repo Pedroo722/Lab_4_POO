@@ -1,20 +1,20 @@
 package model;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Venda {
-  private List<ItemVenda> vendas;
+  private List<Produto> produtos;
 
   public Venda() {
-    vendas = new ArrayList<>();
+    produtos = new ArrayList<>();
   }
 
-  public void novaVenda(ItemVenda itemVenda) {
-    vendas.add(itemVenda);
+  public void adicionarProduto(Produto produto, int quantidadeVendida) {
+    produtos.add(new Produto(produto.getIdentificador(), produto.getNome(), produto.getPreco(), produto.getQuantidade(), quantidadeVendida));
   }
 
-  public List<ItemVenda> listarVendas() {
-    return vendas;
+  public List<Produto> getProdutos() {
+    return produtos;
   }
 }

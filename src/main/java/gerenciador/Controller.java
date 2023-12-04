@@ -15,9 +15,9 @@ import exceptions.VendasVazioException;
 
 // Classes
 
-import model.Venda;
+import model.ListaDeVenda;
 import model.Produto;
-import model.ItemVenda;
+import model.Venda;
 import model.Inventario;
 
 // Classe Principalf
@@ -25,13 +25,13 @@ import model.Inventario;
 public class Controller {
   private static Controller instance;
   private Inventario inventario;
-  private ItemVenda itemVenda;
-  private Venda vendas;
+  private Venda itemVenda;
+  private ListaDeVenda vendas;
 
   public Controller() {
     inventario = new Inventario();
-    itemVenda = new ItemVenda();
-    vendas = new Venda();
+    itemVenda = new Venda();
+    vendas = new ListaDeVenda();
   }
 
   public static Controller getInstance() {
@@ -109,7 +109,7 @@ public class Controller {
 
   // Caso 5. Cadastrar uma venda
   public void adicionarItemVenda(List<Integer> identificadoresProdutos, List<Integer> quantidadesVendidas) {
-    ItemVenda novaVenda = new ItemVenda();
+    Venda novaVenda = new Venda();
 
     for (int i = 0; i < identificadoresProdutos.size(); i++) {
         int identificadorProduto = identificadoresProdutos.get(i);
@@ -142,8 +142,8 @@ public class Controller {
   }
 
   // Caso 6. Listar as vendas atuais
-  public List<ItemVenda> relatorioVendas() {
-    List<ItemVenda> vendas = this.vendas.listarVendas();
+  public List<Venda> relatorioVendas() {
+    List<Venda> vendas = this.vendas.listarVendas();
 
     if (vendas.isEmpty()) {
       throw new VendasVazioException();
@@ -158,7 +158,7 @@ public class Controller {
       throw new NumeroVendaInvalidoException();
     }
 
-    ItemVenda vendaRemovida = vendas.listarVendas().remove(numeroVenda - 1);
+    Venda vendaRemovida = vendas.listarVendas().remove(numeroVenda - 1);
   }
 
   // Função para retornar nome do produto

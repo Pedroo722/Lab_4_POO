@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.Produto;
-import model.ItemVenda;
+import model.Venda;
 
 import validators.DoubleValidator;
 import validators.IntValidator;
@@ -24,7 +24,7 @@ public class Main {
     Scanner nomeScanner = new Scanner(System.in); // scanner para pegar a linha inteira
     boolean processamento = true; // flag para o loop
     List<Produto> produtosNoEstoque;
-    List<ItemVenda> vendas;
+    List<Venda> vendas;
 
     System.out.println("Bem-vindo ao Ponto de Venda do Jeremias!");
     System.out.println("O que deseja fazer?\n");
@@ -215,9 +215,11 @@ public class Main {
                 controller.adicionarItemVenda(identificadoresProdutos, quantidadesVendidas);
               } catch (InventarioInsuficienteException ex) {
                 System.out.println("\n[ALERTA] Quantidade insuficiente no estoque!");
+                System.out.println();
                 break;
               } catch (ProdutoNaoEncontradoException ex) {
                 System.out.println("\n[ALERTA] Produto não encontrado no estoque!");
+                System.out.println();
                 break;
               }
 
@@ -230,7 +232,7 @@ public class Main {
               try {
                 vendas = controller.relatorioVendas();
                 for (int i = 0; i < vendas.size(); i++) {
-                  ItemVenda venda = vendas.get(i);
+                  Venda venda = vendas.get(i);
                   System.out.println("Venda #" + (i + 1));
 
                   List<Produto> produtosVenda = venda.getProdutos();

@@ -1,7 +1,7 @@
 package gui;
 
 import gerenciador.Controller;
-import model.ItemVenda;
+import model.Venda;
 import model.Produto;
 
 import javax.swing.JButton;
@@ -138,7 +138,7 @@ public class VendaWindow extends javax.swing.JFrame {
 
     private void setTextArea() {
         try {
-            List<ItemVenda> vendas;
+            List<Venda> vendas;
             vendas = controller.relatorioVendas();
     
             // Cria um StyledDocument para permitir a formatação HTML
@@ -152,7 +152,7 @@ public class VendaWindow extends javax.swing.JFrame {
             StringBuilder htmlContent = new StringBuilder("<html>");
     
             for (int i = 0; i < vendas.size(); i++) {
-                ItemVenda venda = vendas.get(i);
+                Venda venda = vendas.get(i);
                 htmlContent.append("<hr>");
                 htmlContent.append("<span style='font-size:18px;'>Venda #").append(i + 1).append("</span><br>");
     
