@@ -7,21 +7,19 @@ import model.Produto;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
-import exceptions.EstoqueVazioException;
 import exceptions.VendasVazioException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.GroupLayout;
 
 public class VendaWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VendaWindow
-     */
     private ScreenManager screenManager;
     private Controller controller;
 
@@ -44,9 +42,8 @@ public class VendaWindow extends javax.swing.JFrame {
         JButtonExcluirVenda = new JButton();
         JButtonVoltar = new JButton();
         jScrollPaneVenda = new JScrollPane();
-        jTextAreaVenda = new JTextArea();
-        jTextPaneVenda = new javax.swing.JTextPane();
-        
+        jTextPaneVenda = new JTextPane();
+
         jTextPaneVenda.setContentType("text/html");
         jTextPaneVenda.setEditable(false);
         jScrollPaneVenda.setViewportView(jTextPaneVenda);
@@ -87,10 +84,6 @@ public class VendaWindow extends javax.swing.JFrame {
                 JButtonVoltarActionPerformed(evt);
             }
         });
-
-        jTextAreaVenda.setColumns(20);
-        jTextAreaVenda.setRows(5);
-        jScrollPaneVenda.setViewportView(jTextAreaVenda);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,7 +128,6 @@ public class VendaWindow extends javax.swing.JFrame {
         screenManager.showCadastroVendaWindow();
     }
 
-
     private void JButtonExcluirVendaActionPerformed(java.awt.event.ActionEvent evt) {
         screenManager.showApagarVendaWindow();
     }
@@ -149,35 +141,46 @@ public class VendaWindow extends javax.swing.JFrame {
             List<ItemVenda> vendas;
             vendas = controller.relatorioVendas();
     
-            StringBuilder textContent = new StringBuilder();
+            // Cria um StyledDocument para permitir a formatação HTML
+            StyledDocument doc = jTextPaneVenda.getStyledDocument();
+            doc.setCharacterAttributes(0, doc.getLength(), new SimpleAttributeSet(), true);
+    
+            // Define o tamanho da fonte para 18 pixels
+            SimpleAttributeSet set = new SimpleAttributeSet();
+            StyleConstants.setFontSize(set, 18);
+    
+            StringBuilder htmlContent = new StringBuilder("<html>");
     
             for (int i = 0; i < vendas.size(); i++) {
                 ItemVenda venda = vendas.get(i);
-                textContent.append("===== Venda #").append(i + 1).append(" ====\n");
+                htmlContent.append("<hr>");
+                htmlContent.append("<span style='font-size:18px;'>Venda #").append(i + 1).append("</span><br>");
     
                 List<Produto> produtosVenda = venda.getProdutos();
                 int index = 1;
                 for (Produto produto : produtosVenda) {
-                    textContent.append("Produto #").append(index).append("\n");
-                    textContent.append("* Nome do Produto: ").append(produto.getNome()).append("\n");
-                    textContent.append("* Preço: ").append(produto.getPreco()).append("\n");
-                    textContent.append("* Quantidade Vendida: ").append(produto.getQuantidadeVendida()).append("\n\n");
-
+                    htmlContent.append("<span style='font-size:18px;'>Produto #").append(index).append("</span><br>");
+                    htmlContent.append("* Nome do Produto: ").append(produto.getNome()).append("<br>");
+                    htmlContent.append("* Preço: ").append(produto.getPreco()).append("<br>");
+                    htmlContent.append("* Quantidade Vendida: ").append(produto.getQuantidadeVendida()).append("<br><br>");
+    
                     index++;
                 }
             }
     
             if (vendas.isEmpty()) {
-                textContent.append("Nenhuma venda cadastrada.");
+                htmlContent.append("<span style='font-size:18px;'>Nenhuma venda cadastrada.</span>");
             }
     
-            jTextAreaVenda.setText(textContent.toString());
+            htmlContent.append("</html>");
+            jTextPaneVenda.setText(htmlContent.toString());
+    
+            // Aplica o tamanho da fonte ao documento
+            doc.setCharacterAttributes(0, doc.getLength(), set, false);
         } catch (VendasVazioException e) {
-            jTextAreaVenda.setText("Nenhuma venda cadastrada.");
+            jTextPaneVenda.setText("<span style='font-size:18px;'>Nenhuma venda cadastrada.</span>");
         }
     }
-    
-
 
     public static void main(String args[]) {
         try {
@@ -196,11 +199,9 @@ public class VendaWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VendaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    
-        // Crie uma instância de ScreenManager
+
         ScreenManager screenManager = new ScreenManager();
-    
-        // Passe o ScreenManager ao criar a instância de VendaWindow
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VendaWindow(screenManager).setVisible(true);
@@ -213,6 +214,5 @@ public class VendaWindow extends javax.swing.JFrame {
     private javax.swing.JButton JButtonVoltar;
     private javax.swing.JLabel JLabelMenuVenda;
     private javax.swing.JScrollPane jScrollPaneVenda;
-    private javax.swing.JTextArea jTextAreaVenda;
     private javax.swing.JTextPane jTextPaneVenda;
 }
