@@ -160,4 +160,15 @@ public class Controller {
 
     ItemVenda vendaRemovida = vendas.listarVendas().remove(numeroVenda - 1);
   }
+
+  // Função para retornar nome do produto
+  public String obterNome(int idProduto) {
+    for (Produto produto : inventario.listarProdutos()) {
+        if (idProduto == produto.getIdentificador()) {
+            return produto.getNome();
+        }
+    }
+    return "Não encontrado";
+  }
+
 }

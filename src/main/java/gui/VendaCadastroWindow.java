@@ -116,13 +116,13 @@ public class VendaCadastroWindow extends JFrame {
         jTableVenda.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jTableVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Produto", "Unidades Vendidas"
+                "ID", "Produto", "Unidades Vendidas"
             }
         ) {
             Class[] types = new Class [] {
@@ -210,40 +210,39 @@ public class VendaCadastroWindow extends JFrame {
 
     private void setTableModel() {
         // Dados de exemplo para preencher a tabela
-        Object[][] data = {
-        };
-    
-        String[] columnNames = {"Produto", "Quantidade"};
+        Object[][] data = {};
+
+        String[] columnNames = {"ID", "Produto", "Quantidade"};
     
         // Configure o modelo da tabela com os dados
         jTableVenda.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
             Class[] types = new Class[]{
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
     
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
         });
-
+    
         jTableVenda.setFillsViewportHeight(true);
-
     }
 
     private void jButtonAdicionarItemActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             int idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
             int quantidadeVendida = Integer.parseInt(jTextFieldQuantidadeVendida.getText());
-
+    
             boolean isIdValid = new IntValidator().validate(idProduto);
             boolean isQuantidadeValid = new IntValidator().validate(quantidadeVendida);
-
+    
             if (isIdValid && isQuantidadeValid) {
+                String nomeProduto = controller.obterNome(idProduto); // Obter o nome do produto
                 identificadoresProdutos.add(idProduto);
                 quantidadesVendidas.add(quantidadeVendida);
-
+    
                 DefaultTableModel model = (DefaultTableModel) jTableVenda.getModel();
-                model.addRow(new Object[]{idProduto, quantidadeVendida});
+                model.addRow(new Object[]{idProduto, nomeProduto, quantidadeVendida});
             } else {
                 throw new NumberFormatException();
             }
@@ -253,7 +252,8 @@ public class VendaCadastroWindow extends JFrame {
             JOptionPane.showMessageDialog(this, "Operação falha. Insira números válidos para o ID e a quantidade vendida.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
-
+    
+    
 
     private void jButtonCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {
         try {
