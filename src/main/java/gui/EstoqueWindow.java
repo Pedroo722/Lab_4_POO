@@ -37,6 +37,7 @@ public class EstoqueWindow extends JFrame {
         controller.inicializarProdutos();
         initComponents();
         setTableModel();
+        setLocationRelativeTo(null);
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -59,6 +60,7 @@ public class EstoqueWindow extends JFrame {
         setMinimumSize(new java.awt.Dimension(869, 570));
         setName("frMainWindow");
         setPreferredSize(new java.awt.Dimension(869, 570));
+        setResizable(false);
 
         jLabelMenuEstoque.setFont(new java.awt.Font("Segoe UI", 1, 36));
         jLabelMenuEstoque.setText("Menu do Estoque");

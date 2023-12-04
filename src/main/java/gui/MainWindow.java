@@ -14,6 +14,8 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
         initComponents();
+
+        setLocationRelativeTo(null);
     }
 
     private void initComponents() {
@@ -25,7 +27,7 @@ public class MainWindow extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(557, 428));
         setMinimumSize(new java.awt.Dimension(557, 428));
         setResizable(false);
-
+        
         jButtonEstoque.setBackground(new java.awt.Color(153, 153, 255));
         jButtonEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jButtonEstoque.setForeground(new java.awt.Color(0, 0, 0));

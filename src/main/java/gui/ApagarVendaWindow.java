@@ -22,6 +22,8 @@ public class ApagarVendaWindow extends javax.swing.JFrame {
         this.screenManager = screenManager;
         this.controller = Controller.getInstance();
         initComponents();
+
+        setLocationRelativeTo(null);
     }
 
     private void initComponents() {

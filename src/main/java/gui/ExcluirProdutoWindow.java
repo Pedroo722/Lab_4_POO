@@ -38,6 +38,7 @@ public class ExcluirProdutoWindow extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(869, 570));
         setPreferredSize(new java.awt.Dimension(869, 570));
         setResizable(false);
+        setLocationRelativeTo(null);
 
         jLabelExcluirProduto.setFont(new java.awt.Font("Segoe UI", 1, 36));
         jLabelExcluirProduto.setText("Excluir Produto");

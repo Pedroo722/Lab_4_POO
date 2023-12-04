@@ -41,6 +41,8 @@ public class VendaCadastroWindow extends JFrame {
         this.controller = Controller.getInstance();
         initComponents();
         setTableModel();
+
+        setLocationRelativeTo(null);
     }
 
     private void initComponents() {
@@ -59,6 +61,7 @@ public class VendaCadastroWindow extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setMinimumSize(new java.awt.Dimension(869, 570));
+        setResizable(false);
 
         jButtonVoltar.setBackground(new java.awt.Color(204, 204, 255));
         jButtonVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24));

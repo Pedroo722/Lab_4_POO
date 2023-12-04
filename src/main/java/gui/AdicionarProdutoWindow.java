@@ -32,6 +32,8 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
         this.screenManager = screenManager;
         this.controller = Controller.getInstance();
         initComponents();
+
+        setLocationRelativeTo(null);
     }
 
     private void initComponents() {
@@ -155,7 +157,9 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
             boolean isPrecoValid = new DoubleValidator().validate(valor);
             boolean isQuantidadeValid = new IntValidator().validate(quantidade);
 
-            controller.cadastrarProduto(ID, nome, valor, quantidade);
+            if (isNomeValid && isPrecoValid && isQuantidadeValid) {
+                controller.cadastrarProduto(ID, nome, valor, quantidade);
+            }
 
             jTextFieldNome.setText("");
             jTextFieldValor.setText("");

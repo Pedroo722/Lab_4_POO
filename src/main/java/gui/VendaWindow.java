@@ -28,6 +28,8 @@ public class VendaWindow extends javax.swing.JFrame {
         this.controller = Controller.getInstance();
         initComponents();
 
+        setLocationRelativeTo(null);
+
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -51,6 +53,7 @@ public class VendaWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(869, 570));
         setPreferredSize(new java.awt.Dimension(869, 570));
+        setResizable(false);
 
         JLabelMenuVenda.setFont(new java.awt.Font("Segoe UI", 1, 36));
         JLabelMenuVenda.setText("Menu de Venda");
