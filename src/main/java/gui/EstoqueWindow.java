@@ -5,13 +5,12 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
 
 import exceptions.EstoqueVazioException;
-import exceptions.IDInvalidoException;
 import gerenciador.Controller;
 import model.Produto;
 
@@ -31,6 +30,7 @@ public class EstoqueWindow extends JFrame {
     public EstoqueWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
         this.controller = Controller.getInstance();
+        controller.inicializarProdutos();
         initComponents();
         setTableModel();
 
@@ -200,12 +200,10 @@ public class EstoqueWindow extends JFrame {
     }
 
     private void setTableModel() {
-    // Obtenha os dados reais do método listarProdutos do Controller
         try {
             List<Produto> produtos = controller.listarProdutos();
 
-            // Converta a lista de produtos para um array bidimensional
-            Object[][] data = new Object[produtos.size()][4];
+            Object[][] data = new Object[produtos.size()][5]; // Aumente para 5 colunas
 
             for (int i = 0; i < produtos.size(); i++) {
                 Produto produto = produtos.get(i);
@@ -213,14 +211,20 @@ public class EstoqueWindow extends JFrame {
                 data[i][1] = produto.getNome();
                 data[i][2] = produto.getPreco();
                 data[i][3] = produto.getQuantidade();
+                
+                // Adicione a lógica para determinar o Status
+                if (produto.getQuantidade() < 5) {
+                    data[i][4] = "Baixa Quantidade";
+                } else {
+                    data[i][4] = "Alta Quantidade";
+                }
             }
 
-            String[] columnNames = {"ID", "Descrição", "Preço", "Quantidade no Estoque"};
+            String[] columnNames = {"ID", "Descrição", "Preço", "Quantidade no Estoque", "Status"};
 
-            // Configure o modelo da tabela com os dados reais
-            jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
+            jTableEstoque.setModel(new DefaultTableModel(data, columnNames) {
                 Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                        Integer.class, String.class, Double.class, Integer.class, String.class
                 };
 
                 public Class getColumnClass(int columnIndex) {
@@ -229,46 +233,52 @@ public class EstoqueWindow extends JFrame {
             });
 
             jTableEstoque.setFillsViewportHeight(true);
-        }  catch (EstoqueVazioException e) {
-            
+        } catch (EstoqueVazioException e) {
+            jTableEstoque.setModel(new DefaultTableModel());
         }
     }
 
-    private void atualizarTabela() {
+    protected void atualizarTabela() {
         try {
             // Obtenha os dados reais do método listarProdutos do Controller
             List<Produto> produtos = controller.listarProdutos();
-        
+    
             // Converta a lista de produtos para um array bidimensional
-            Object[][] data = new Object[produtos.size()][4];
-        
+            Object[][] data = new Object[produtos.size()][5]; // Aumente para 5 colunas
+    
             for (int i = 0; i < produtos.size(); i++) {
                 Produto produto = produtos.get(i);
                 data[i][0] = produto.getIdentificador();
                 data[i][1] = produto.getNome();
                 data[i][2] = produto.getPreco();
                 data[i][3] = produto.getQuantidade();
+                
+                // Adicione a lógica para determinar o Status
+                if (produto.getQuantidade() < 5) {
+                    data[i][4] = "Baixa Quantidade";
+                } else {
+                    data[i][4] = "Alta Quantidade";
+                }
             }
-        
-            String[] columnNames = {"ID", "Descrição", "Preço", "Quantidade no Estoque"};
-        
+    
+            String[] columnNames = {"ID", "Descrição", "Preço", "Quantidade no Estoque", "Status"};
+    
             // Configure o modelo da tabela com os dados reais
             jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(data, columnNames) {
                 Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
                 };
-        
+    
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
             });
-        
+    
             jTableEstoque.setFillsViewportHeight(true);
         } catch (EstoqueVazioException ex) {
             //
         }
     }
-
 
     public static void main(String args[]) {
         try {

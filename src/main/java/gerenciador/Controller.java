@@ -170,4 +170,12 @@ public class Controller {
     }
     return "Não encontrado";
   }
+
+
+  public void inicializarProdutos() {
+    cadastrarProduto(122, "Bola", 10.0, 50);
+    cadastrarProduto(279, "Carregador", 15.0, 30);
+    cadastrarProduto(497, "Alicate", 20.0, 40);
+
+  }
 }
