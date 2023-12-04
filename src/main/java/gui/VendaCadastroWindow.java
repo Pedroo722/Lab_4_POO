@@ -211,7 +211,7 @@ public class VendaCadastroWindow extends JFrame {
     private void setTableModel() {
         // Dados de exemplo para preencher a tabela
         Object[][] data = {};
-
+    
         String[] columnNames = {"ID", "Produto", "Quantidade"};
     
         // Configure o modelo da tabela com os dados
@@ -227,7 +227,7 @@ public class VendaCadastroWindow extends JFrame {
     
         jTableVenda.setFillsViewportHeight(true);
     }
-
+    
     private void jButtonAdicionarItemActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             int idProduto = Integer.parseInt(jTextFieldIdProduto.getText());
@@ -252,7 +252,6 @@ public class VendaCadastroWindow extends JFrame {
             JOptionPane.showMessageDialog(this, "Operação falha. Insira números válidos para o ID e a quantidade vendida.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
     
 
     private void jButtonCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {
