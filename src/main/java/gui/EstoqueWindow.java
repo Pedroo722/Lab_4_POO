@@ -7,7 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import java.awt.Component;
+
 import java.awt.Color;
 
 import exceptions.EstoqueVazioException;
@@ -211,7 +215,7 @@ public class EstoqueWindow extends JFrame {
                 data[i][1] = produto.getNome();
                 data[i][2] = produto.getPreco();
                 data[i][3] = produto.getQuantidade();
-                
+
                 // Adicione a lógica para determinar o Status
                 if (produto.getQuantidade() < 5) {
                     data[i][4] = "Baixa Quantidade";
@@ -222,19 +226,48 @@ public class EstoqueWindow extends JFrame {
 
             String[] columnNames = {"ID", "Descrição", "Preço", "Quantidade no Estoque", "Status"};
 
-            jTableEstoque.setModel(new DefaultTableModel(data, columnNames) {
+            DefaultTableModel model = new DefaultTableModel(data, columnNames) {
                 Class[] types = new Class[]{
-                        Integer.class, String.class, Double.class, Integer.class, String.class
+                    Integer.class, String.class, Double.class, Integer.class, String.class
                 };
 
+                @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
-            });
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // torna as células não editáveis
+                }
+            };
+
+            jTableEstoque.setModel(model);
+            jTableEstoque.setDefaultRenderer(Object.class, new StatusCellRenderer());
 
             jTableEstoque.setFillsViewportHeight(true);
         } catch (EstoqueVazioException e) {
             jTableEstoque.setModel(new DefaultTableModel());
+        }
+    }
+
+    // Adicione esta classe StatusCellRenderer
+    class StatusCellRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            String status = value.toString();
+
+            if ("Baixa Quantidade".equals(status)) {
+                component.setBackground(Color.RED);
+            } else if ("Alta Quantidade".equals(status)) {
+                component.setBackground(Color.GREEN);
+            } else {
+                component.setBackground(Color.WHITE);
+            }
+
+            return component;
         }
     }
 
