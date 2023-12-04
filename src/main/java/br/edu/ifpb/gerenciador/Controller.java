@@ -1,6 +1,7 @@
 package br.edu.ifpb.gerenciador;
 
 import java.util.List;
+import java.util.Optional;
 
 import br.edu.ifpb.exceptions.EstoqueVazioException;
 import br.edu.ifpb.exceptions.IDInvalidoException;
@@ -168,7 +169,6 @@ public class Controller {
     }
     return "Não encontrado";
   }
-
 
   public void inicializarProdutos() {
     cadastrarProduto(122, "Bola", 10.0, 50);

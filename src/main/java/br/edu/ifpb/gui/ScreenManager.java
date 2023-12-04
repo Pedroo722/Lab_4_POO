@@ -3,6 +3,7 @@ package br.edu.ifpb.gui;
 import br.edu.ifpb.gui.EstoqueWindow;
 import br.edu.ifpb.gui.MainWindow;
 import br.edu.ifpb.gui.VendaWindow;
+import br.edu.ifpb.model.Produto;
 
 public class ScreenManager {
     private MainWindow mainWindow;
@@ -19,7 +20,7 @@ public class ScreenManager {
         estoqueWindow = new EstoqueWindow(this);
         vendaWindow = new VendaWindow(this);
         cadastroProdutoWindow = new AdicionarProdutoWindow(this);
-        editarProdutoWindow = new EditarProdutoWindow(this);
+        editarProdutoWindow = new EditarProdutoWindow(this, null);
         excluirProdutoWindow = new ExcluirProdutoWindow(this);
         cadastroVendaWindow = new VendaCadastroWindow(this);
         apagarVendaWindow = new ApagarVendaWindow(this);
@@ -50,7 +51,8 @@ public class ScreenManager {
         excluirProdutoWindow.setVisible(false);
     }
 
-    public void showEditarProdutoWindow() {
+    public void showEditarProdutoWindow(Produto p) {
+        editarProdutoWindow = new EditarProdutoWindow(this, p);
         editarProdutoWindow.setVisible(true);
         mainWindow.setVisible(false);
         estoqueWindow.setVisible(false);

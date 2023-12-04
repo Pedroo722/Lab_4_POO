@@ -4,8 +4,6 @@ import br.edu.ifpb.validators.DoubleValidator;
 import br.edu.ifpb.validators.IntValidator;
 import br.edu.ifpb.validators.StringValidator;
 
-import java.util.Random;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,6 +12,7 @@ import javax.swing.JTextField;
 import br.edu.ifpb.exceptions.EstoqueVazioException;
 import br.edu.ifpb.exceptions.ProdutoNaoEncontradoException;
 import br.edu.ifpb.gerenciador.Controller;
+import br.edu.ifpb.model.Produto;
 
 public class EditarProdutoWindow extends javax.swing.JFrame {
 
@@ -22,11 +21,13 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
      */
     private ScreenManager screenManager;
     private Controller controller;
+    private Produto produto;
 
 
-    public EditarProdutoWindow(ScreenManager screenManager) {
+    public EditarProdutoWindow(ScreenManager screenManager, Produto p) {
         this.screenManager = screenManager;
         this.controller = Controller.getInstance();
+        this.produto = p;
         initComponents();
 
         setLocationRelativeTo(null);
@@ -44,6 +45,13 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
         jTextFieldNovoPreco = new JTextField();
         jLabelIdProduto = new JLabel();
         jTextFieldIdProduto = new JTextField();
+
+        if (produto != null) {
+            jTextFieldIdProduto.setText(produto.getIdentificador() + "");
+            jTextFieldNovaQuantidade.setText(produto.getQuantidade() + "");
+            jTextFieldNovoNome.setText(produto.getNome());
+            jTextFieldNovoPreco.setText(produto.getPreco() + "");   
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(869, 570));
@@ -219,7 +227,7 @@ public class EditarProdutoWindow extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarProdutoWindow(screenManager).setVisible(true);
+                new EditarProdutoWindow(screenManager, null).setVisible(true);
             }
         });
     }

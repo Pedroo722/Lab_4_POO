@@ -9,7 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import br.edu.ifpb.exceptions.EstoqueVazioException;
 import br.edu.ifpb.gerenciador.Controller;
@@ -108,6 +107,7 @@ public class EstoqueWindow extends JFrame {
             }
         });
 
+        jTableEstoque.setSelectionForeground(Color.BLACK);
         jTableEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,7 +200,13 @@ public class EstoqueWindow extends JFrame {
     }
 
     private void jButtonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        screenManager.showEditarProdutoWindow();
+        int linha = jTableEstoque.getSelectedRow();
+        int identificador = (int) jTableEstoque.getModel().getValueAt(linha, 0);
+        String descricao = jTableEstoque.getModel().getValueAt(linha, 1).toString();
+        double preco = (double) jTableEstoque.getModel().getValueAt(linha, 2);
+        int quantidade = (int) jTableEstoque.getModel().getValueAt(linha, 3);
+
+        screenManager.showEditarProdutoWindow(new Produto(identificador, descricao, preco, quantidade));
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
