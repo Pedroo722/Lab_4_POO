@@ -45,6 +45,11 @@ public class VendaWindow extends javax.swing.JFrame {
         JButtonVoltar = new JButton();
         jScrollPaneVenda = new JScrollPane();
         jTextAreaVenda = new JTextArea();
+        jTextPaneVenda = new javax.swing.JTextPane();
+        
+        jTextPaneVenda.setContentType("text/html");
+        jTextPaneVenda.setEditable(false);
+        jScrollPaneVenda.setViewportView(jTextPaneVenda);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(869, 570));
@@ -148,13 +153,17 @@ public class VendaWindow extends javax.swing.JFrame {
     
             for (int i = 0; i < vendas.size(); i++) {
                 ItemVenda venda = vendas.get(i);
-                textContent.append("Venda #").append(i + 1).append("\n");
+                textContent.append("===== Venda #").append(i + 1).append(" ====\n");
     
                 List<Produto> produtosVenda = venda.getProdutos();
+                int index = 1;
                 for (Produto produto : produtosVenda) {
+                    textContent.append("Produto #").append(index).append("\n");
                     textContent.append("* Nome do Produto: ").append(produto.getNome()).append("\n");
                     textContent.append("* Preço: ").append(produto.getPreco()).append("\n");
                     textContent.append("* Quantidade Vendida: ").append(produto.getQuantidadeVendida()).append("\n\n");
+
+                    index++;
                 }
             }
     
@@ -205,4 +214,5 @@ public class VendaWindow extends javax.swing.JFrame {
     private javax.swing.JLabel JLabelMenuVenda;
     private javax.swing.JScrollPane jScrollPaneVenda;
     private javax.swing.JTextArea jTextAreaVenda;
+    private javax.swing.JTextPane jTextPaneVenda;
 }
