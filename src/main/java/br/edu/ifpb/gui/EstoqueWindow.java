@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -107,7 +108,8 @@ public class EstoqueWindow extends JFrame {
             }
         });
 
-        jTableEstoque.setSelectionForeground(Color.BLACK);
+        jTableEstoque.setSelectionBackground(Color.CYAN);
+        jTableEstoque.setSelectionForeground(Color.BLUE);
         jTableEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18));
         jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,13 +202,17 @@ public class EstoqueWindow extends JFrame {
     }
 
     private void jButtonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {
-        int linha = jTableEstoque.getSelectedRow();
-        int identificador = (int) jTableEstoque.getModel().getValueAt(linha, 0);
-        String descricao = jTableEstoque.getModel().getValueAt(linha, 1).toString();
-        double preco = (double) jTableEstoque.getModel().getValueAt(linha, 2);
-        int quantidade = (int) jTableEstoque.getModel().getValueAt(linha, 3);
+        try {
+            int linha = jTableEstoque.getSelectedRow();
+            int identificador = (int) jTableEstoque.getModel().getValueAt(linha, 0);
+            String descricao = jTableEstoque.getModel().getValueAt(linha, 1).toString();
+            double preco = (double) jTableEstoque.getModel().getValueAt(linha, 2);
+            int quantidade = (int) jTableEstoque.getModel().getValueAt(linha, 3);
 
-        screenManager.showEditarProdutoWindow(new Produto(identificador, descricao, preco, quantidade));
+            screenManager.showEditarProdutoWindow(new Produto(identificador, descricao, preco, quantidade));
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(this, "Operação falha. Selecione um item primeiro.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
