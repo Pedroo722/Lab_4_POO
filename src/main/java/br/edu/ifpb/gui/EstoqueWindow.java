@@ -47,6 +47,23 @@ public class EstoqueWindow extends JFrame {
                 atualizarTabela();
             }
         });
+
+        jTableEstoque.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                if (isSelected) { 
+                    component.setBackground(new Color(173, 216, 230)); // Azul claro
+                    
+                } else {
+                    // Se não estiver selecionado, use a cor padrão de fundo
+                    component.setBackground(table.getBackground());
+                }
+
+                return component;
+            }
+        });
     }
 
     private void initComponents() {
