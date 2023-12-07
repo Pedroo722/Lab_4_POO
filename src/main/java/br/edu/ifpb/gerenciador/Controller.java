@@ -1,7 +1,6 @@
 package br.edu.ifpb.gerenciador;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.edu.ifpb.exceptions.EstoqueVazioException;
 import br.edu.ifpb.exceptions.IDInvalidoException;
@@ -12,20 +11,22 @@ import br.edu.ifpb.exceptions.VendasVazioException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
-
-// Classes
+import java.io.ObjectOutputStream;
 
 import br.edu.ifpb.model.ListaDeVenda;
 import br.edu.ifpb.model.Produto;
 import br.edu.ifpb.model.Venda;
 import br.edu.ifpb.model.Inventario;
 
+import java.io.Serializable;
+
+
 // Classe Principal
 
-public class Controller {
+public class Controller implements Serializable {
   private static Controller instance;
   private Inventario inventario;
   private Venda itemVenda;
@@ -75,8 +76,27 @@ public class Controller {
     }
   }
 
-  // Escreve nos arquivos
-  //// Para fazer
+  public void salvarProdutos() {
+    try (FileOutputStream fileOut = new FileOutputStream("produtos.bin");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+        List<Produto> produtos = inventario.listarProdutos();
+        out.writeObject(produtos);
+        System.out.printf("Serialized data is saved in produtos.bin%n");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+  }
+
+  public void salvarVendas() {
+    try (FileOutputStream fileOut = new FileOutputStream("vendas.bin");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+        List<Venda> vendasList = vendas.listarVendas();
+        out.writeObject(vendasList);
+        System.out.printf("Serialized data is saved in vendas.bin%n");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+  }
 
   // Caso 1. Cadastrar produto no Estoque
   public void cadastrarProduto(Integer identificadorProduto, String nomeProduto, double precoProduto, int quantidadeProduto) {

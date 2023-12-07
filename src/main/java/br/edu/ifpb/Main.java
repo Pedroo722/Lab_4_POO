@@ -11,8 +11,10 @@ import br.edu.ifpb.exceptions.NumeroVendaInvalidoException;
 import br.edu.ifpb.exceptions.ProdutoNaoEncontradoException;
 import br.edu.ifpb.exceptions.VendasVazioException;
 import br.edu.ifpb.gerenciador.Controller;
+
 import br.edu.ifpb.model.Produto;
 import br.edu.ifpb.model.Venda;
+
 import br.edu.ifpb.validators.DoubleValidator;
 import br.edu.ifpb.validators.IntValidator;
 import br.edu.ifpb.validators.StringValidator;
@@ -274,6 +276,8 @@ public class Main {
 
         // Encerrar o Processamento
         case 3:
+          controller.salvarProdutos();
+          controller.salvarVendas();
           System.out.println("Sistema encerrado.");
           processamento = false;
           break;

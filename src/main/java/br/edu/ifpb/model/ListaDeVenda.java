@@ -1,9 +1,10 @@
 package br.edu.ifpb.model;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ListaDeVenda {
+public class ListaDeVenda implements Serializable {
   private List<Venda> vendas;
 
   public ListaDeVenda() {
@@ -16,5 +17,9 @@ public class ListaDeVenda {
 
   public List<Venda> listarVendas() {
     return vendas;
+  }
+
+  public void setVendas(List<Venda> vendas) {
+    this.vendas = vendas;
   }
 }

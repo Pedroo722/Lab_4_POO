@@ -19,6 +19,10 @@ public class Inventario implements Serializable {
     return estoque;
   }
 
+  public void setProdutos(List<Produto> produtos) {
+    this.estoque = produtos;
+  }
+
   public void removerProduto(Produto produto) {
     estoque.remove(produto);
   }
