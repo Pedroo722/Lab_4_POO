@@ -10,6 +10,10 @@ import br.edu.ifpb.exceptions.NumeroVendaInvalidoException;
 import br.edu.ifpb.exceptions.ProdutoNaoEncontradoException;
 import br.edu.ifpb.exceptions.VendasVazioException;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 // Classes
@@ -19,7 +23,7 @@ import br.edu.ifpb.model.Produto;
 import br.edu.ifpb.model.Venda;
 import br.edu.ifpb.model.Inventario;
 
-// Classe Principalf
+// Classe Principal
 
 public class Controller {
   private static Controller instance;
@@ -31,6 +35,9 @@ public class Controller {
     inventario = new Inventario();
     itemVenda = new Venda();
     vendas = new ListaDeVenda();
+
+    inicializarProdutos(); 
+    inicializarVendas(); 
   }
 
   public static Controller getInstance() {
@@ -39,6 +46,37 @@ public class Controller {
     }
     return instance;
   }
+
+  // Recebe dados dos arquivos
+
+  public void inicializarProdutos() {
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("produtos.bin"))) {
+        List<Produto> produtosSerializados = (List<Produto>) ois.readObject();
+        inventario.setProdutos(produtosSerializados);
+    } catch (FileNotFoundException e) {
+        // Handle file not found exception
+        e.printStackTrace();
+    } catch (IOException | ClassNotFoundException e) {
+        // Handle IO or class not found exception
+        e.printStackTrace();
+    }
+  }
+
+  public void inicializarVendas() {
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("vendas.bin"))) {
+        List<Venda> vendasSerializadas = (List<Venda>) ois.readObject();
+        vendas.setVendas(vendasSerializadas);
+    } catch (FileNotFoundException e) {
+        // Handle file not found exception
+        e.printStackTrace();
+    } catch (IOException | ClassNotFoundException e) {
+        // Handle IO or class not found exception
+        e.printStackTrace();
+    }
+  }
+
+  // Escreve nos arquivos
+  //// Para fazer
 
   // Caso 1. Cadastrar produto no Estoque
   public void cadastrarProduto(Integer identificadorProduto, String nomeProduto, double precoProduto, int quantidadeProduto) {
@@ -168,12 +206,5 @@ public class Controller {
         }
     }
     return "Não encontrado";
-  }
-
-  public void inicializarProdutos() {
-    cadastrarProduto(122, "Bola", 10.0, 50);
-    cadastrarProduto(279, "Carregador", 15.0, 30);
-    cadastrarProduto(497, "Alicate", 20.0, 40);
-
   }
 }

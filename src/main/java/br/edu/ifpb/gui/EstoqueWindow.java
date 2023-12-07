@@ -36,7 +36,6 @@ public class EstoqueWindow extends JFrame {
     public EstoqueWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
         this.controller = Controller.getInstance();
-        controller.inicializarProdutos();
         initComponents();
         setTableModel();
         setLocationRelativeTo(null);
