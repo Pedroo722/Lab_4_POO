@@ -36,7 +36,7 @@ public class Main {
       System.out.println("Selecione uma opção: ");
       System.out.println("1 - Operações no inventário");
       System.out.println("2 - Operações de Vendas");
-      System.out.println("3 - Sair\n");
+      System.out.println("3 - Sair e Salvar\n");
       System.out.print("Opção: ");
       int opcao = scanner.nextInt();
       System.out.println();

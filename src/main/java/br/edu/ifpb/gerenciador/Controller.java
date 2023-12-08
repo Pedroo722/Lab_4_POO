@@ -48,7 +48,7 @@ public class Controller implements Serializable {
     return instance;
   }
 
-  // Recebe dados dos arquivos
+  // Serialização e Deserialização
 
   public void inicializarProdutos() {
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("produtos.bin"))) {
@@ -81,7 +81,7 @@ public class Controller implements Serializable {
          ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
         List<Produto> produtos = inventario.listarProdutos();
         out.writeObject(produtos);
-        System.out.printf("Serialized data is saved in produtos.bin%n");
+        System.out.printf("Produtos salvos em produtos.bin%n");
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -92,7 +92,7 @@ public class Controller implements Serializable {
          ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
         List<Venda> vendasList = vendas.listarVendas();
         out.writeObject(vendasList);
-        System.out.printf("Serialized data is saved in vendas.bin%n");
+        System.out.printf("Vendas salvas em vendas.bin%n");
     } catch (IOException e) {
         e.printStackTrace();
     }

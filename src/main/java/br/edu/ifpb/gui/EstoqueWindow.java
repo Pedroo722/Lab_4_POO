@@ -45,6 +45,12 @@ public class EstoqueWindow extends JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 atualizarTabela();
             }
+
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                controller.salvarProdutos();
+                controller.salvarVendas();
+            }
         });
 
         jTableEstoque.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {

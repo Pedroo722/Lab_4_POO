@@ -34,6 +34,14 @@ public class AdicionarProdutoWindow extends javax.swing.JFrame {
         initComponents();
 
         setLocationRelativeTo(null);
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                controller.salvarProdutos();
+                controller.salvarVendas();
+            }
+        });
     }
 
     private void initComponents() {

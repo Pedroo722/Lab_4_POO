@@ -22,6 +22,14 @@
             this.screenManager = screenManager;
             this.controller = Controller.getInstance();
             initComponents();
+
+            addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent evt) {
+                    controller.salvarProdutos();
+                    controller.salvarVendas();
+                }
+            });
         }
 
 

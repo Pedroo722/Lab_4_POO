@@ -35,6 +35,12 @@ public class VendaWindow extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 setTextArea();
             }
+
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                controller.salvarProdutos();
+                controller.salvarVendas();
+            }
         });
     }
 

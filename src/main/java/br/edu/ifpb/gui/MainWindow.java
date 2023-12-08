@@ -1,5 +1,7 @@
 package br.edu.ifpb.gui;
 
+import br.edu.ifpb.gerenciador.Controller;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -10,12 +12,22 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     private ScreenManager screenManager;
+    private Controller controller;
 
     public MainWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
+        this.controller = Controller.getInstance();
         initComponents();
 
         setLocationRelativeTo(null);
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                controller.salvarProdutos();
+                controller.salvarVendas();
+            }
+        });
     }
 
     private void initComponents() {
