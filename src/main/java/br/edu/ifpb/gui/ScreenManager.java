@@ -1,28 +1,25 @@
 package br.edu.ifpb.gui;
 
-import br.edu.ifpb.gui.EstoqueWindow;
-import br.edu.ifpb.gui.MainWindow;
-import br.edu.ifpb.gui.VendaWindow;
 import br.edu.ifpb.model.Produto;
 
 public class ScreenManager {
     private MainWindow mainWindow;
     private EstoqueWindow estoqueWindow;
     private VendaWindow vendaWindow;
-    private AdicionarProdutoWindow cadastroProdutoWindow;
+    private AdicionarProdutoWindow adicionarProdutoWindow;
     private EditarProdutoWindow editarProdutoWindow;
-    private ExcluirProdutoWindow excluirProdutoWindow;
-    private VendaCadastroWindow cadastroVendaWindow;
+    private ApagarProdutoWindow apagarProdutoWindow;
+    private AdicionarVendaWindow cadastroVendaWindow;
     private ApagarVendaWindow apagarVendaWindow;
 
     public ScreenManager() {
         mainWindow = new MainWindow(this);
         estoqueWindow = new EstoqueWindow(this);
         vendaWindow = new VendaWindow(this);
-        cadastroProdutoWindow = new AdicionarProdutoWindow(this);
+        adicionarProdutoWindow = new AdicionarProdutoWindow(this);
         editarProdutoWindow = new EditarProdutoWindow(this, null);
-        excluirProdutoWindow = new ExcluirProdutoWindow(this);
-        cadastroVendaWindow = new VendaCadastroWindow(this);
+        apagarProdutoWindow = new ApagarProdutoWindow(this);
+        cadastroVendaWindow = new AdicionarVendaWindow(this);
         apagarVendaWindow = new ApagarVendaWindow(this);
     }
 
@@ -38,17 +35,17 @@ public class ScreenManager {
         estoqueWindow.setVisible(true);
         mainWindow.setVisible(false);
         vendaWindow.setVisible(false);
-        cadastroProdutoWindow.setVisible(false);
+        adicionarProdutoWindow.setVisible(false);
         editarProdutoWindow.setVisible(false);
-        excluirProdutoWindow.setVisible(false);
+        apagarProdutoWindow.setVisible(false);
     }
 
     public void showAdicionarProdutoWindow() {
-        cadastroProdutoWindow.setVisible(true);
+        adicionarProdutoWindow.setVisible(true);
         mainWindow.setVisible(false);
         estoqueWindow.setVisible(false);
         editarProdutoWindow.setVisible(false);
-        excluirProdutoWindow.setVisible(false);
+        apagarProdutoWindow.setVisible(false);
     }
 
     public void showEditarProdutoWindow(Produto p) {
@@ -56,15 +53,15 @@ public class ScreenManager {
         editarProdutoWindow.setVisible(true);
         mainWindow.setVisible(false);
         estoqueWindow.setVisible(false);
-        cadastroProdutoWindow.setVisible(false);
-        excluirProdutoWindow.setVisible(false);
+        adicionarProdutoWindow.setVisible(false);
+        apagarProdutoWindow.setVisible(false);
     }
 
     public void showExcluirProdutoWindow() {
-        excluirProdutoWindow.setVisible(true);
+        apagarProdutoWindow.setVisible(true);
         mainWindow.setVisible(false);
         estoqueWindow.setVisible(false);
-        cadastroProdutoWindow.setVisible(false);
+        adicionarProdutoWindow.setVisible(false);
         editarProdutoWindow.setVisible(false);
     }
 

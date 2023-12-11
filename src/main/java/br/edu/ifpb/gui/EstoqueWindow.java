@@ -297,7 +297,9 @@ public class EstoqueWindow extends JFrame {
 
             String status = value.toString();
 
-            if ("Baixa Quantidade".equals(status)) {
+            if (isSelected) {
+                component.setBackground(new Color(173, 216, 230)); // Azul claro quando selecionado
+            } else if ("Baixa Quantidade".equals(status)) {
                 component.setBackground(Color.RED);
             } else if ("Alta Quantidade".equals(status)) {
                 component.setBackground(Color.GREEN);
@@ -309,7 +311,8 @@ public class EstoqueWindow extends JFrame {
         }
     }
 
-    protected void atualizarTabela() {
+
+    private void atualizarTabela() {
         try {
             // Obtenha os dados reais do método listarProdutos do Controller
             List<Produto> produtos = controller.listarProdutos();
@@ -323,7 +326,7 @@ public class EstoqueWindow extends JFrame {
                 data[i][1] = produto.getNome();
                 data[i][2] = produto.getPreco();
                 data[i][3] = produto.getQuantidade();
-                
+    
                 // Adicione a lógica para determinar o Status
                 if (produto.getQuantidade() < 5) {
                     data[i][4] = "Baixa Quantidade";
@@ -345,12 +348,31 @@ public class EstoqueWindow extends JFrame {
                 }
             });
     
+            jTableEstoque.setDefaultRenderer(Object.class, new StatusCellRenderer()); // Adicione esta linha
+    
             jTableEstoque.setFillsViewportHeight(true);
         } catch (EstoqueVazioException ex) {
-            //
+            // Exceção capturada, exiba a mensagem na tabela
+            String[] columnNames = {"Mensagem"};
+            Object[][] data = {{"Nenhum produto cadastrado."}};
+    
+            jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
+    
+            // Defina o renderizador padrão para a mensagem
+            jTableEstoque.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    component.setBackground(table.getBackground());
+                    return component;
+                }
+            });
+    
+            jTableEstoque.setFillsViewportHeight(true);
         }
     }
 
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

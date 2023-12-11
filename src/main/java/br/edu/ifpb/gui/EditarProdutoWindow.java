@@ -16,9 +16,6 @@ import br.edu.ifpb.model.Produto;
 
 public class EditarProdutoWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EditarProdutoWindow
-     */
     private ScreenManager screenManager;
     private Controller controller;
     private Produto produto;

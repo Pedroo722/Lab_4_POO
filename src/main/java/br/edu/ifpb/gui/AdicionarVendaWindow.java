@@ -18,7 +18,7 @@ import br.edu.ifpb.exceptions.InventarioInsuficienteException;
 import br.edu.ifpb.exceptions.ProdutoNaoEncontradoException;
 import br.edu.ifpb.gerenciador.Controller;
 
-public class VendaCadastroWindow extends JFrame {
+public class AdicionarVendaWindow extends JFrame {
 
     private JButton jButtonVoltar;
     private JButton jButtonCadastrarVenda;
@@ -36,7 +36,7 @@ public class VendaCadastroWindow extends JFrame {
     private List<Integer> identificadoresProdutos = new ArrayList<>();
     private List<Integer> quantidadesVendidas = new ArrayList<>();
 
-    public VendaCadastroWindow(ScreenManager screenManager) {
+    public AdicionarVendaWindow(ScreenManager screenManager) {
         this.screenManager = screenManager;
         this.controller = Controller.getInstance();
         initComponents();
@@ -309,20 +309,20 @@ public class VendaCadastroWindow extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VendaCadastroWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarVendaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VendaCadastroWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarVendaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VendaCadastroWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarVendaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VendaCadastroWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarVendaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         ScreenManager screenManager = new ScreenManager();
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VendaCadastroWindow(screenManager).setVisible(true);
+                new AdicionarVendaWindow(screenManager).setVisible(true);
             }
         });
     }

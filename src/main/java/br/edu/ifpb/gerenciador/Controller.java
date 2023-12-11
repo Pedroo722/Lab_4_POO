@@ -215,7 +215,7 @@ public class Controller implements Serializable {
       throw new NumeroVendaInvalidoException();
     }
 
-    Venda vendaRemovida = vendas.listarVendas().remove(numeroVenda - 1);
+    vendas.listarVendas().remove(numeroVenda - 1);
   }
 
   // Função para retornar nome do produto
