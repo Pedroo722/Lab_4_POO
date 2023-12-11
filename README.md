@@ -1,7 +1,15 @@
-Lista de Exercício 4 da disciplina de Programação Orientada a Objetos
+Projeto para a disciplina de Programação Orientada a Objetos.
 
 ## **Tema 4. Ponto de venda**
 Crie um sistema de ponto de venda para gerenciar produtos, vendas e inventário.
+
+Para executar no terminal execute o arquivo Main.java. Para executar a interface gráfica execute o arquivo MainWindow.java.
+
+E para executar o arquivo jar apenas digite no terminal:
+
+```powershell
+java -jar Ponto_de_Venda.jar
+```
 
 ### **Desafios adicionais (opcionais):**
 
